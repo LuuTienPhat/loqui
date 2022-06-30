@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">loqui</string>
+    <string name="greeting">Xin chào!</string>
+    <string name="title_activity_login">Đăng nhập</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Mật khẩu</string>
+    <string name="action_sign_in">Đăng nhập hoặc đăng ký</string>
+    <string name="action_sign_in_short">Đăng nhập</string>
+    <string name="welcome">"Chào mừng !"</string>
+    <string name="invalid_username">Username không chính xác</string>
+    <string name="invalid_password">Mật khẩu phải dài hơn 5 ký tự</string>
+    <string name="login_failed">"Đăng nhập thất bại"</string>
+    <string name="title_activity_settings">Cài đặt</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Tin nhắn</string>
+    <string name="sync_header">Đồng bộ</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Chữ ký của bạn</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+</resources>
