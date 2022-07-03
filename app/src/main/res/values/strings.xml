@@ -26,4 +26,43 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!--Page Title -->
+    <string name="chats_page_title">Chats</string>
+    <string name="calls_page_title">Calls</string>
+    <string name="people_page_title">People</string>
+    <string name="settings_page_title">Settings</string>
+
+    <!-- Main Bottom navigation -->
+    <string name="main_bottom_navigation_chats_label">Chats</string>
+    <string name="main_bottom_navigation_calls_label">Calls</string>
+    <string name="main_bottom_navigation_people_label">People</string>
+    <string name="main_bottom_navigation_settings_label">Settings</string>
+
+    <!-- Main Top navigation -->
+    <string name="main_top_navigation_camera_label">Camera</string>
+    <string name="main_top_navigation_edit_label">Edit</string>
+    <string name="main_top_navigation_content_description_camera">Camera</string>
+    <string name="main_top_navigation_content_description_edit">Camera</string>
+
+    <!-- Settings -->
+
+    <!-- Setting Section-->
+    <string name="setting_section_profile_label">Profile</string>
+    <string name="setting_section_services_label">Services</string>
+    <string name="setting_section_preferences_label">Preferences</string>
+    <string name="setting_section_account_label">Account</string>
+
+
+    <!-- Setting Option-->
+    <string name="setting_dark_mode_label">Dark mode</string>
+    <string name="setting_message_requests_label">Message requests</string>
+    <string name="setting_archived_chats_label">Archived chats</string>
+    <string name="setting_custom_status_label">Custom status</string>
+    <string name="setting_active_status_label">Active Status</string>
+    <string name="setting_username_label">Username</string>
+    <string name="setting_leagal_policies">Legal &amp; policies</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
