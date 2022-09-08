@@ -7,10 +7,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.loqui.CallFragment;
 import com.example.loqui.ChatFragment;
 import com.example.loqui.PeopleFragment;
-import com.example.loqui.ui.settings.SettingsFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
@@ -30,23 +28,23 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
                 ChatFragment chatFragment = new ChatFragment();
                 return chatFragment;
             }
-            case 1: {
-                CallFragment callFragment = new CallFragment();
-                return callFragment;
-            }
-            case 2: {
+//            case 1: {
+//                CallFragment callFragment = new CallFragment();
+//                return callFragment;
+//            }
+            default: {
                 PeopleFragment peopleFragment = new PeopleFragment();
                 return peopleFragment;
             }
-            default: {
-                SettingsFragment settingsFragment = new SettingsFragment();
-                return settingsFragment;
-            }
+//            default: {
+//                SettingsFragment settingsFragment = new SettingsFragment();
+//                return settingsFragment;
+//            }
         }
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 2;
     }
 }

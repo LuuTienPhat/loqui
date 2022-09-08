@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cultured"
+    android:orientation="vertical"
+    android:padding="@dimen/_5sdp"
+    tools:context=".StatusActivity">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvParticipant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:text="Icon"
+        android:textColor="@color/steel_blue"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/background_image"
+        android:backgroundTint="@color/azureish_white"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etIcon"
+        style="@style/EditTextSignUpActivity"
+        android:layout_height="@dimen/_40sdp"
+        android:hint="Icon"
+        android:inputType="text" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etName"
+        style="@style/EditTextSignUpActivity"
+        android:layout_height="@dimen/_40sdp"
+        android:hint="Name"
+        android:inputType="text" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnApply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/bg_radius_10"
+        android:backgroundTint="@color/space_cadet"
+        android:text="SET"
+        android:textColor="@color/cultured" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etHour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:hint="Hour"
+        android:textColorHint="@color/steel_blue"
+        android:visibility="gone"
+        app:boxStrokeColor="@color/space_cadet">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textColor="@color/space_cadet"
+            android:textSize="@dimen/_10sdp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

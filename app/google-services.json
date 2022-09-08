@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "995255921840",
-    "project_id": "loqui-a8e76",
-    "storage_bucket": "loqui-a8e76.appspot.com"
+    "project_number": "156036687015",
+    "project_id": "vaulted-hangout-322018",
+    "storage_bucket": "vaulted-hangout-322018.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:995255921840:android:eca03c55dc01bf402edf75",
+        "mobilesdk_app_id": "1:156036687015:android:f2438f38f827049f1e6782",
         "android_client_info": {
           "package_name": "com.example.loqui"
         }
       },
       "oauth_client": [
         {
-          "client_id": "995255921840-5tam7jgrlpr10kuve1lbjmlnvp3m6nq0.apps.googleusercontent.com",
+          "client_id": "156036687015-0ntmil3m5qk87bpqgtqfft3k8rb5tpmd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.loqui",
@@ -22,20 +22,57 @@
           }
         },
         {
-          "client_id": "995255921840-gpag8lqru41smibr2udcv37uher2145d.apps.googleusercontent.com",
+          "client_id": "156036687015-ae0t9vf36need0e5okii5ouu76qlt6he.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCG3lpR68yW9YVHvrUJoFv1gGpS4d6vYzk"
+          "current_key": "AIzaSyBeLoLUTSISM-fSdv8ipWERtDel3wQarT8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "995255921840-gpag8lqru41smibr2udcv37uher2145d.apps.googleusercontent.com",
+              "client_id": "156036687015-ae0t9vf36need0e5okii5ouu76qlt6he.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156036687015:android:b59d30479769d20f1e6782",
+        "android_client_info": {
+          "package_name": "com.example.testfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156036687015-97vkna95k0ubbsv065r1uvtondr1mkcs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.testfirebase",
+            "certificate_hash": "b1d4ffe3dcdd0a22e7ac576455dcdc260329f5cb"
+          }
+        },
+        {
+          "client_id": "156036687015-ae0t9vf36need0e5okii5ouu76qlt6he.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeLoLUTSISM-fSdv8ipWERtDel3wQarT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156036687015-ae0t9vf36need0e5okii5ouu76qlt6he.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuCamera"
+        android:icon="@drawable/ic_round_photo_camera_24"
+        android:title="Delete"
+        app:iconTint="@color/cultured"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menuPicture"
+        android:icon="@drawable/ic_round_image_24"
+        android:title="Select All"
+        app:iconTint="@color/cultured"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menuRotate"
+        android:icon="@drawable/ic_round_rotate_right_24"
+        android:title="Select All"
+        app:iconTint="@color/cultured"
+        app:showAsAction="always" />
+</menu>

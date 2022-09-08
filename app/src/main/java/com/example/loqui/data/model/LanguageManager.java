@@ -5,9 +5,10 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 
+import java.io.Serializable;
 import java.util.Locale;
 
-public class LanguageManager {
+public class LanguageManager implements Serializable {
     private Context context;
     private SharedPreferences sharedPreferences;
 

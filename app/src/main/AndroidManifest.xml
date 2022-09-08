@@ -4,6 +4,16 @@
     package="com.example.loqui">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -13,21 +23,147 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Loqui"
+        android:theme="@style/Theme.App"
         tools:targetApi="31">
         <activity
-            android:name=".UsersActivity"
+            android:name=".AddGroupMemberActivity"
+            android:exported="false"
+            android:label="Add participants" />
+        <activity
+            android:name=".CustomGroupActivity"
+            android:exported="false"
+            android:label="Custom Group" />
+        <activity
+            android:name=".GroupMemberActivity"
+            android:exported="false"
+            android:label="Members" />
+        <activity
+            android:name=".SwitchAccountActivity"
             android:exported="false" />
         <activity
-            android:theme="@style/Theme.Material3.DayNight.NoActionBar"
-            android:name=".activities.SignUpActivity"
+            android:name=".activities.settings.SettingsNotificationActivity"
+            android:exported="false"
+            android:label="Notification" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.App.NoActionBar" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.App.NoActionBar" />
+        <activity
+            android:name=".ImageViewActivity"
+            android:exported="false"
+            android:label="" />
+        <activity
+            android:name=".JitsiActivity"
+            android:exported="false"
+            android:theme="@style/Theme.App.NoActionBar" />
+        <activity
+            android:name=".ArchivedChatActivity"
+            android:exported="false"
+            android:label="Archived Chats" />
+        <activity
+            android:name=".ForwardActivity"
+            android:exported="false"
+            android:label="Send To" />
+        <activity
+            android:name=".AttachmentActivity"
+            android:exported="false"
+            android:label="Media and Files" />
+        <activity
+            android:name=".MessageRequestActivity"
+            android:exported="false"
+            android:label="Message Request" />
+        <activity
+            android:name=".AccountInformationActivity"
+            android:exported="false"
+            android:label="Information" />
+        <activity
+            android:name=".NicknameActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SignInActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Material3.DayNight.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
+            android:name=".InfoActivity"
+            android:exported="false"
+            android:label="" />
+        <activity
+            android:name=".OutgoingCallActivity"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.App.NoActionBar" />
+        <activity
+            android:name=".IncomingCallActivity"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.App.NoActionBar">
 
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".StatusActivity"
+            android:exported="false"
+            android:label="Add Status" />
+        <activity
+            android:name=".CropActivity"
+            android:exported="false"
+            android:label="Edit" />
+        <activity
+            android:name=".CustomStatusActivity"
+            android:exported="false"
+            android:label="Your status" />
+        <activity
+            android:name=".ActiveStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RenameGroupActivity"
+            android:exported="false"
+            android:label="New group chat" />
+        <activity
+            android:name=".CreateGroupActivity"
+            android:exported="false"
+            android:label="Add participants" />
+        <activity
+            android:name=".activities.settings.LegalPolicyActivity"
+            android:exported="false"
+            android:label="Legal and Policy" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
+
+        <activity
+            android:name=".FacebookLoginActivity"
+            android:exported="true"
+            android:label="Sign In with Facebook" />
+        <activity
+            android:name=".UsersActivity"
+            android:exported="false"
+            android:label="Friends" />
+        <activity
+            android:name=".activities.settings.SettingsActivity"
+            android:exported="false"
+            android:label="Me" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false"
+            android:theme="@style/Theme.App.NoActionBar" />
+        <activity
+            android:name=".activities.settings.MeActivity"
+            android:exported="false"
+            android:label="Your Info" />
+        <activity
+            android:name=".SignInActivity"
+            android:exported="true"
+            android:theme="@style/Theme.App.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,20 +182,32 @@
         <activity
             android:name=".ChatActivity"
             android:exported="false"
+            android:theme="@style/Theme.App.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".ui.settings.SettingDarkModeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.settings.SettingsActivity"
-            android:exported="false"
-            android:label="@string/settings_page_title" />
         <activity
             android:name=".MainActivity2"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.App.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

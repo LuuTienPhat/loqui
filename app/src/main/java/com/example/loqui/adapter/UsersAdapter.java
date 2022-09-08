@@ -1,8 +1,5 @@
 package com.example.loqui.adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -12,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.loqui.data.model.User;
 import com.example.loqui.databinding.ItemContainerUserBinding;
 import com.example.loqui.listeners.UserListener;
+import com.example.loqui.utils.Utils;
 
 import java.util.List;
 
@@ -25,20 +23,20 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         this.userListener = userListener;
     }
 
-    public UsersAdapter(List<User> users) {
-        this.users = users;
-        userListener = null;
-    }
+//    public UsersAdapter(List<User> users) {
+//        this.users = users;
+//        userListener = null;
+//    }
 
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemContainerUserBinding itemContainerUserBinding = ItemContainerUserBinding.inflate(
+        ItemContainerUserBinding binding = ItemContainerUserBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
         );
-        return new UserViewHolder(itemContainerUserBinding);
+        return new UserViewHolder(binding);
     }
 
     @Override
@@ -62,13 +60,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
         void setUserData(User user) {
             binding.tvTextName.setText(user.getFullName());
-            binding.imageProfile.setImageBitmap(getUserImage(user.getImage()));
+            binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(user.getImage()));
             binding.getRoot().setOnClickListener(view -> userListener.onUserClicked(user));
         }
     }
 
-    private Bitmap getUserImage(String encodedImage) {
-        byte[] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-    }
+//    private Bitmap getUserImage(String encodedImage) {
+//        byte[] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
+//        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//    }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/btnCall"
+        android:contentDescription="@string/main_top_navigation_content_description_camera"
+        android:icon="@drawable/ic_baseline_call_24"
+        android:title="@string/main_top_navigation_camera_label"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/btnCallVideo"
+        android:contentDescription="@string/main_top_navigation_content_description_edit"
+        android:icon="@drawable/ic_baseline_videocam_24"
+        android:title="@string/main_top_navigation_edit_label"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/btnInfo"
+        android:contentDescription="@string/main_top_navigation_content_description_edit"
+        android:icon="@drawable/ic_outline_info_24"
+        android:iconTint="@color/white"
+        android:title="@string/main_top_navigation_edit_label"
+        app:showAsAction="ifRoom" />
+
+</menu>

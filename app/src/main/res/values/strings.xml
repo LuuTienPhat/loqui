@@ -82,4 +82,24 @@
 
     <string name="type_a_messgae">Type a message</string>
     <string name="select_user">Type a message</string>
+
+    <string name="facebook_app_id" translatable="false">3193102834238352</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb3193102834238352</string>
+    <string name="facebook_client_token" translatable="false">a74e63147033586a65a846c58c730d9b</string>
+
+    <string name="term_of_service">Terms of Service</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="cookies_policy">Cookies Policy</string>
+    <string name="third_party_policy">Third-party Policy</string>
+
+    <string name="activity_settings_label">Me</string>
+
+    <!-- Font -->
+    <string name="roboto_regular" translatable="false">sans-serif</string>
+    <string name="roboto_light" translatable="false">sans-serif-light</string>
+    <string name="roboto_condensed" translatable="false">sans-serif-condensed</string>
+    <string name="roboto_thin" translatable="false">sans-serif-thin</string>
+    <string name="roboto_medium" translatable="false">sans-serif-medium</string>
+
+    <string name="number_picker_formatter" translatable="false">%02d</string>
 </resources>

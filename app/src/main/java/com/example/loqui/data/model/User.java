@@ -3,18 +3,57 @@ package com.example.loqui.data.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private String id, firstname, lastname, email, token, image;
+    private String id;
+    //    private String name;
+    private String firstName;
+    private String lastName;
 
-    public User() {
+    public String getFirstName() {
+        return firstName;
     }
 
-    public User(String id, String firstname, String lastname, String email, String token, String image) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.token = token;
-        this.image = image;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    private String email;
+    private String token;
+    private String image;
+    private String phone, allowMessageRequest, availability, memberType;
+
+    public String getMemberType() {
+        return memberType;
+    }
+
+    public void setMemberType(String memberType) {
+        this.memberType = memberType;
+    }
+
+    public String getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+
+    public String getAllowMessageRequest() {
+        return allowMessageRequest;
+    }
+
+    public void setAllowMessageRequest(String allowMessageRequest) {
+        this.allowMessageRequest = allowMessageRequest;
+    }
+
+    public User() {
     }
 
     public String getId() {
@@ -25,21 +64,13 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public String getEmail() {
         return email;
@@ -65,11 +96,24 @@ public class User implements Serializable {
         this.image = image;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getFullName() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getFirstname());
-        sb.append(" ");
-        sb.append(getLastname());
+        if (lastName != null) {
+            sb.append(getLastName());
+            sb.append(" ");
+        }
+
+        if (firstName != null) {
+            sb.append(getFirstName());
+        }
         return sb.toString();
     }
 }
