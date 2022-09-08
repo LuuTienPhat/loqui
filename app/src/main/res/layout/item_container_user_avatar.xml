@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/background_image"
+            android:backgroundTint="@color/azureish_white"
+            android:scaleType="centerCrop"
+            app:riv_oval="true" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnRemove"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:layout_alignEnd="@id/ivAvatar"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/circular_badge"
+            android:backgroundTint="@color/space_cadet"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_round_close_24" />
+
+        <!--                <View-->
+        <!--                    android:id="@+id/badge"-->
+        <!--                    android:layout_width="@dimen/_16sdp"-->
+        <!--                    android:layout_height="@dimen/_16sdp"-->
+        <!--                    android:layout_alignParentEnd="true"-->
+        <!--                    android:layout_alignParentBottom="true"-->
+        <!--                    android:layout_marginEnd="@dimen/_8sdp"-->
+        <!--                    android:layout_marginBottom="@dimen/_8sdp"-->
+        <!--                    android:background="@drawable/circular_badge" />-->
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAlignment="center"
+        android:textColor="@color/space_cadet"
+        android:textSize="@dimen/_10ssp" />
+</androidx.appcompat.widget.LinearLayoutCompat>

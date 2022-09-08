@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/btnDownload"
+        android:icon="@drawable/ic_round_download_24"
+        android:iconTint="@color/cultured"
+        android:title="@string/main_top_navigation_camera_label"
+        app:showAsAction="ifRoom" />
+</menu>

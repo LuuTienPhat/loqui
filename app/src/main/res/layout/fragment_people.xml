@@ -1,14 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lySwipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PeopleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:animateLayoutChanges="true"
+        android:background="@color/cultured"
+        android:padding="@dimen/_5sdp"
+        tools:context=".PeopleFragment">
 
-</FrameLayout>
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/bg_radius_10"
+            android:backgroundTint="@color/azureish_white"
+            android:iconifiedByDefault="false"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toTopOf="@id/label1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@null" />
+
+        <!--    <androidx.appcompat.widget.SearchView-->
+        <!--        android:id="@+id/searchView"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginBottom="@dimen/_10sdp"-->
+        <!--        android:background="@drawable/bg_radius_10"-->
+        <!--        android:backgroundTint="@color/azureish_white"-->
+        <!--        app:layout_constraintBottom_toTopOf="@id/label1"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toTopOf="parent"-->
+        <!--        app:queryBackground="@color/space_cadet"-->
+        <!--        app:queryHint="Search" />-->
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="Suggested"
+            android:textColor="@color/steel_blue"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/frameLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchView" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/cultured"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_user"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/progressBar"
+                style="@style/SpinKitView.Small.CubeGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/space_cadet" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvErrorMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/_24sdp"
+                android:gravity="center"
+                android:textColor="@color/space_cadet"
+                android:textSize="@dimen/_12ssp"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

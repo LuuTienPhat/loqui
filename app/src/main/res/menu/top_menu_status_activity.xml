@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/btnSaveStatus"
+        android:icon="@drawable/ic_round_save_24"
+        android:iconTint="@color/cultured"
+        android:title="Save"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/btnDeleteStatus"
+        android:icon="@drawable/ic_round_delete_24"
+        android:iconTint="@color/cultured"
+        android:title="Delete"
+        app:showAsAction="ifRoom" />
+
+</menu>

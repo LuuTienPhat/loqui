@@ -5,68 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/login_motion"
-    tools:context=".activities.SignUpActivity">
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageView_logo"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="80dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/icon"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageView_logoRays"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/icon2"
-        android:rotation="180"
-        android:scaleType="centerInside"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".SignUpActivity">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/ivAvatar"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:background="@drawable/background_image"
+        android:backgroundTint="@color/azureish_white"
         android:scaleType="centerCrop"
+        android:src="@drawable/images_avatar"
+        app:layout_constraintBottom_toTopOf="@id/linearlayout_inputs"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_oval="true" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageView_cloudLeft"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="10dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/cloud"
-        android:translationX="-20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/lightGrey" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageView_cloudRight"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="120dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/cloud"
-        android:translationX="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/lightGrey" />
 
     <LinearLayout
         android:id="@+id/linearlayout_inputs"
@@ -74,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:alpha="1"
@@ -81,109 +37,120 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_cloudRight">
+        app:layout_constraintTop_toBottomOf="@+id/ivAvatar">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:text="Sign Up"
-            android:textColor="@color/textHeadline"
-            android:textSize="20sp" />
+            android:textColor="@color/space_cadet"
+            android:textSize="@dimen/_18ssp" />
 
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etFullName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/login_edittext_bg"
-            android:drawableStart="@drawable/ic_baseline_person_24"
-            android:drawableLeft="@drawable/ic_baseline_person_24"
-            android:drawablePadding="16dp"
-            android:hint="Họ và tên"
-            android:inputType="text"
-            android:padding="16dp"
-            android:textSize="14sp" />
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radius_10"
+                android:backgroundTint="@color/azureish_white"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/space_cadet"
+                android:hint="Firstname"
+                android:inputType="text"
+                android:padding="@dimen/_12sdp"
+                android:textColor="@color/space_cadet"
+                android:textColorHint="@color/steel_blue"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etFirstname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radius_10"
+                android:backgroundTint="@color/azureish_white"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/space_cadet"
+                android:hint="Lastname"
+                android:inputType="text"
+                android:padding="@dimen/_12sdp"
+                android:textColor="@color/space_cadet"
+                android:textColorHint="@color/steel_blue"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/login_edittext_bg"
+            style="@style/EditTextSignUpActivity"
             android:drawableStart="@drawable/ic_baseline_email_24"
             android:drawableLeft="@drawable/ic_baseline_email_24"
-            android:drawablePadding="16dp"
             android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:padding="16dp"
-            android:textSize="14sp" />
+            android:inputType="textEmailAddress" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/login_edittext_bg"
+            style="@style/EditTextSignUpActivity"
             android:drawableStart="@drawable/ic_baseline_phone_24"
             android:drawableLeft="@drawable/ic_baseline_phone_24"
-            android:drawablePadding="16dp"
-            android:hint="Số điện thoại"
-            android:inputType="number"
-            android:padding="16dp"
-            android:textSize="14sp" />
+            android:hint="Phone"
+            android:inputType="number" />
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etUsername"
+            style="@style/EditTextSignUpActivity"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:hint="Username"
+            android:inputType="text" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/login_edittext_bg"
+            style="@style/EditTextSignUpActivity"
             android:drawableStart="@drawable/ic_baseline_lock_24"
             android:drawableLeft="@drawable/ic_baseline_lock_24"
-            android:drawablePadding="16dp"
             android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textSize="14sp" />
+            android:inputType="textPassword" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etConfirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/login_edittext_bg"
+            style="@style/EditTextSignUpActivity"
             android:drawableStart="@drawable/ic_baseline_lock_clock_24"
             android:drawableLeft="@drawable/ic_baseline_lock_clock_24"
-            android:drawablePadding="16dp"
-            android:hint="Xác nhận lại Password"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textSize="14sp" />
+            android:hint="Confirm Password"
+            android:inputType="textPassword" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/login_button_bg"
-                android:backgroundTint="@color/colorPrimary"
+                android:background="@drawable/bg_radius_10"
+                android:backgroundTint="@color/space_cadet"
                 android:text="SIGN UP"
-                android:textColor="@color/white"
-                app:backgroundTint="#FFB20C" />
+                android:textColor="@color/cultured" />
 
-            <ProgressBar
+            <com.github.ybq.android.spinkit.SpinKitView
                 android:id="@+id/progressBar"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
+                style="@style/SpinKitView.Small.ChasingDots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:visibility="invisible" />
+                android:visibility="gone"
+                app:SpinKit_Color="@color/space_cadet" />
 
         </FrameLayout>
     </LinearLayout>
@@ -193,9 +160,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="@string/signup_register_button"
-        android:textColor="@color/textHeadline"
+        android:text="Sign In"
+        android:textColor="@color/space_cadet"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

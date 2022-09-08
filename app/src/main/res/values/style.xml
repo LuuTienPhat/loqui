@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="borderlessButton" parent="Widget.AppCompat.Button.Borderless" />
+
+    <style name="EditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/bg_radius_10</item>
+        <item name="android:backgroundTint">@color/azureish_white</item>
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textColorHint">@color/steel_blue</item>
+        <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
+        <item name="android:paddingStart">@dimen/_20sdp</item>
+        <item name="android:paddingEnd">@dimen/_20sdp</item>
+        <item name="android:ems">10</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="EditTextSignUpActivity" parent="@android:style/Widget.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/_6sdp</item>
+        <item name="android:background">@drawable/bg_radius_10</item>
+        <item name="android:backgroundTint">@color/azureish_white</item>
+        <item name="android:drawableTint">@color/space_cadet</item>
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:textColorHint">@color/steel_blue</item>
+        <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:drawablePadding">@dimen/_14sdp</item>
+        <item name="android:ems">10</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+    </style>
+
+    <style name="buttonInAccountActivity" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/bg_radius_10</item>
+    </style>
+
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">@color/space_cadet</item>
+    </style>
+
+    <style name="Widget.App.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorSurface">@color/azureish_white</item>
+        <item name="colorOnSurface">@color/steel_blue</item>
+        <item name="colorSecondary">@color/space_cadet</item>
+    </style>
+</resources>

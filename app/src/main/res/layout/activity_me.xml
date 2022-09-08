@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cultured"
+    tools:context=".activities.settings.MeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/space_cadet"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="@drawable/background_image"
+                android:backgroundTint="@color/azureish_white"
+                android:scaleType="centerCrop"
+                android:src="@drawable/images_avatar"
+                app:riv_oval="true" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etLastName"
+                    style="@style/EditTextSignUpActivity"
+                    android:layout_weight="1"
+                    android:hint="Firstname"
+                    android:inputType="text" />
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etFirstname"
+                    style="@style/EditTextSignUpActivity"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:hint="Lastname"
+                    android:inputType="text"
+                    android:textColorHint="@color/steel_blue" />
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etEmail"
+                style="@style/EditTextSignUpActivity"
+                android:drawableStart="@drawable/ic_baseline_email_24"
+                android:drawableLeft="@drawable/ic_baseline_email_24"
+                android:hint="Email"
+                android:inputType="text"
+                android:textColorHint="@color/steel_blue" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPhone"
+                style="@style/EditTextSignUpActivity"
+                android:drawableStart="@drawable/ic_baseline_phone_24"
+                android:drawableLeft="@drawable/ic_baseline_phone_24"
+                android:hint="Phone" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:hint="UID"
+                android:visibility="gone"
+                app:hintTextColor="@color/space_cadet"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textIntEdtUID"
+                    style="@style/EditTextSignUpActivity"
+                    android:hint="UID"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnUpdate"
+                        style="@style/buttonInAccountActivity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/space_cadet"
+                        android:text="Update"
+                        android:textColor="@color/cultured" />
+
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:id="@+id/progressBar"
+                        style="@style/SpinKitView.Small.ChasingDots"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        app:SpinKit_Color="@color/space_cadet" />
+
+                </FrameLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnChangePassword"
+                    style="@style/buttonInAccountActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/azureish_white"
+                    android:text="Change Password"
+                    android:textColor="@color/steel_blue" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lySwipe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddGroupMemberActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cultured"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp">
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/bg_round_corner_5"
+            android:backgroundTint="@color/azureish_white"
+            android:foregroundTint="@color/space_cadet"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/label1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="Friends"
+            android:textColor="@color/steel_blue"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_user"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/progressBar"
+                style="@style/SpinKitView.Small.CubeGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/space_cadet" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvErrorMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/_24sdp"
+                android:gravity="center"
+                android:textColor="@color/space_cadet"
+                android:textSize="@dimen/_12ssp"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

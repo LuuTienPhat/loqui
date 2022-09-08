@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cultured"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/_5sdp"
+    android:paddingVertical="@dimen/_20sdp">
+
+
+    <LinearLayout
+        android:id="@+id/btnRemove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/bg_round_corner_5"
+        android:backgroundTint="@color/cultured"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/removeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_round_remove_24"
+            android:backgroundTint="@color/space_cadet"
+            android:padding="@dimen/_12sdp" />
+
+        <TextView
+            android:id="@+id/removeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="Remove"
+            android:textSize="@dimen/_12ssp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnSetAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/bg_round_corner_5"
+        android:backgroundTint="@color/cultured"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/adminIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_round_person_24"
+            android:backgroundTint="@color/space_cadet"
+            android:padding="@dimen/_12sdp" />
+
+        <TextView
+            android:id="@+id/adminText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="Set Admin"
+            android:textSize="@dimen/_12ssp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_corner_5"
+        android:backgroundTint="@color/cultured"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_info_outline_white_24dp"
+            android:backgroundTint="@color/space_cadet"
+            android:padding="@dimen/_12sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="Info"
+            android:textSize="@dimen/_12ssp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,49 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="@dimen/_8sdp"
     android:padding="@dimen/_4sdp">
 
-<com.makeramen.roundedimageview.RoundedImageView
-    android:id="@+id/imageProfile"
-    android:layout_width="@dimen/_25sdp"
-    android:layout_height="@dimen/_25sdp"
-    android:background="@drawable/background_image"
-    android:scaleType="centerCrop"
-    app:riv_oval="true"
-    app:layout_constraintBottom_toBottomOf="@id/tvMessage"
-    app:layout_constraintStart_toStartOf="parent"
-    />
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageProfile"
+        android:layout_width="@dimen/_16sdp"
+        android:layout_height="@dimen/_16sdp"
+        android:background="@drawable/background_image"
+        android:backgroundTint="@color/steel_blue"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/lyMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:riv_oval="true" />
+
+    <LinearLayout
+        android:id="@+id/lyReplyMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tvReplyMessage"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/tvReplyMessage"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:background="@drawable/ic_round_reply_24"
+            android:backgroundTint="@color/secondary_text" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMessageReplyTo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/_12sdp"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/_8ssp" />
+
+    </LinearLayout>
+
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvMessage"
+        android:id="@+id/tvReplyMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
-        android:background="@drawable/background_received_message"
-        android:paddingStart="@dimen/_12sdp"
-        android:paddingEnd="@dimen/_12sdp"
-        android:paddingVertical="@dimen/_12sdp"
-        app:layout_constraintWidth_max="wrap"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
+        android:background="@drawable/background_reply_message"
+        android:backgroundTint="@color/azureish_white"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/steel_blue"
+        android:textSize="@dimen/_10ssp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/lyMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/imageProfile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.75"
-        />
+        app:layout_constraintTop_toBottomOf="@id/lyReplyMessage"
+        app:layout_constraintWidth_max="wrap"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <LinearLayout
+        android:id="@+id/lyMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/imageProfile"
+        app:layout_constraintTop_toBottomOf="@id/tvReplyMessage"
+        app:layout_constraintWidth_max="wrap"
+        app:layout_constraintWidth_percent="0.75">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_received_message"
+            android:backgroundTint="@color/steel_blue"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/cultured"
+            android:textSize="@dimen/_10ssp" />
+
+        <LinearLayout
+            android:id="@+id/lyFile"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_received_message"
+            android:backgroundTint="@color/steel_blue"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_image"
+                android:backgroundTint="@color/cultured"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_baseline_attach_file_24"
+                    android:backgroundTint="@color/steel_blue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvFileName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxLines="1"
+                    android:textColor="@color/cultured"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvFileSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_light"
+                    android:maxLines="1"
+                    android:textColor="@color/cultured"
+                    android:textSize="@dimen/_8ssp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_received_message"
+            android:backgroundTint="@color/steel_blue"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Shared Location"
+                android:textColor="@color/cultured"
+                android:textSize="@dimen/_10ssp" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:background="@drawable/background_image"
+                android:backgroundTint="@color/cultured"
+                android:padding="@dimen/_5sdp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_round_location_on_24"
+                    android:backgroundTint="@color/steel_blue" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImage"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:background="@drawable/background_received_message"
+            android:backgroundTint="@color/cultured"
+            android:padding="@dimen/_10sdp"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDateTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_3sdp"
         android:textColor="@color/secondary_text"
-        android:textSize="@dimen/_8sdp"
-        app:layout_constraintStart_toStartOf="@id/tvMessage"
-        app:layout_constraintTop_toBottomOf="@id/tvMessage"
+        android:textSize="@dimen/_6ssp"
+        app:layout_constraintStart_toStartOf="@id/lyMessage"
+        app:layout_constraintTop_toBottomOf="@id/lyMessage" />
 
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

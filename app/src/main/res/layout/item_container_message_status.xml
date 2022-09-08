@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_8sdp">
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_5sdp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/steel_blue"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -5,7 +5,7 @@
     app:layoutDescription="@xml/login_motion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SignInActivity">
+    tools:context=".SignInActivity">
 
     <ImageView
         android:id="@+id/imageView_logo"

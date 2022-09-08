@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cultured"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/_8sdp">
+
+    <!--    <com.makeramen.roundedimageview.RoundedImageView-->
+    <!--        android:id="@+id/ivAvatar"-->
+    <!--        android:layout_width="@dimen/_35sdp"-->
+    <!--        android:layout_height="@dimen/_35sdp"-->
+    <!--        android:background="@drawable/background_image"-->
+    <!--        android:backgroundTint="@color/azureish_white"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        android:src="@drawable/ic_baseline_person_24"-->
+    <!--        app:riv_oval="true" />-->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textColor="@color/space_cadet"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/space_cadet"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/space_cadet"
+            android:textSize="@dimen/_10ssp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>

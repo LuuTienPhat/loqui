@@ -1,22 +1,95 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Loqui" parent="Theme.Material3.Light">
-<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
-<!--        <item name="colorPrimary">@color/purple_500</item>-->
-<!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
-<!--        <item name="colorOnPrimary">@color/white</item>-->
-<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
-<!--        <item name="colorSecondary">@color/teal_200</item>-->
-<!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
-<!--        <item name="colorOnSecondary">@color/black</item>-->
-<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
-<!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
-<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <style name="Theme.Loqui" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
+        <!--        <item name="colorPrimary">@color/purple_500</item>-->
+        <!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
+        <!--        <item name="colorOnPrimary">@color/white</item>-->
+        <!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+        <!--        <item name="colorSecondary">@color/teal_200</item>-->
+        <!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
+        <!--        <item name="colorOnSecondary">@color/black</item>-->
+        <!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
+        <!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
+        <!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Theme.App" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:textColorPrimary">@color/space_cadet</item>
+        <item name="colorPrimary">@color/space_cadet</item>
+        <item name="colorPrimaryDark">@color/space_cadet</item>
+
+        <item name="colorOnPrimary">@color/cultured</item>
+        <item name="colorOnSurface">@color/space_cadet</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Theme.App.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:textColorPrimary">@color/space_cadet</item>
+        <item name="colorPrimary">@color/space_cadet</item>
+        <item name="colorPrimaryDark">@color/space_cadet</item>
+
+        <item name="colorOnPrimary">@color/cultured</item>
+        <item name="colorOnSurface">@color/space_cadet</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
     </style>
 
     <style name="Theme.ChatApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
+
+    <style name="BaseBottomSheetDialog" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_top_radius_10</item>
+    </style>
+
+    <style name="Theme.SettingsActivity" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:textColorPrimary">@color/space_cadet</item>
+        <item name="colorPrimary">@color/space_cadet</item>
+        <item name="colorPrimaryDark">@color/space_cadet</item>
+
+        <item name="colorOnPrimary">@color/cultured</item>
+        <item name="colorOnSurface">@color/space_cadet</item>
+    </style>
+
+    <style name="Theme.CallActivity" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:textColorPrimary">@color/space_cadet</item>
+        <item name="colorPrimary">@color/space_cadet</item>
+        <item name="colorPrimaryDark">@color/space_cadet</item>
+
+        <item name="colorOnPrimary">@color/cultured</item>
+        <item name="colorOnSurface">@color/space_cadet</item>
     </style>
 </resources>

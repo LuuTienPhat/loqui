@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_8sdp"
+    android:padding="@dimen/_4sdp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageProfile"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:background="@drawable/background_image"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/rvList"
+        app:layout_constraintStart_toStartOf="parent"
+        app:riv_oval="true" />
+
+    <LinearLayout
+        android:id="@+id/lyReplyMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/tvReplyMessage"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/tvReplyMessage"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:background="@drawable/ic_round_reply_24"
+            android:backgroundTint="@color/secondary_text" />
+
+        <TextView
+            android:id="@+id/rvListReplyTo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/_12sdp"
+            android:text="You Reply To your self"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/_10ssp" />
+
+    </LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvReplyMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:background="@drawable/bg_radius_10"
+        android:backgroundTint="@color/azureish_white"
+        android:ellipsize="end"
+        android:maxWidth="@dimen/_150sdp"
+        android:maxLines="2"
+        android:paddingVertical="@dimen/_12sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:text="This is ok"
+        android:textColor="@color/steel_blue"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintBottom_toTopOf="@id/rvList"
+        app:layout_constraintEnd_toEndOf="@id/rvList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/imageProfile"
+        app:layout_constraintTop_toBottomOf="@id/lyReplyMessage"
+        app:layout_constraintWidth_max="wrap" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvList"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:background="@drawable/bg_radius_10"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        android:text="Not OK"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/imageProfile"
+        app:layout_constraintTop_toBottomOf="@id/tvReplyMessage"
+        app:layout_constraintWidth_max="wrap"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDateTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/_8sdp"
+        app:layout_constraintStart_toStartOf="@id/rvList"
+        app:layout_constraintTop_toBottomOf="@id/rvList"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

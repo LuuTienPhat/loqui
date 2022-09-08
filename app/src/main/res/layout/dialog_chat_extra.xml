@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/space_cadet"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/_20sdp"
+    android:paddingVertical="@dimen/_30sdp">
+
+    <LinearLayout
+        android:id="@+id/btnSendLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btnCamera"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_image"
+            android:backgroundTint="@color/cultured"
+            android:padding="@dimen/_10sdp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_round_location_on_24"
+                android:backgroundTint="@color/space_cadet" />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Location"
+            android:textColor="@color/cultured"
+            android:textSize="@dimen/_12sdp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/btnCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btnPhoto"
+        app:layout_constraintStart_toEndOf="@id/btnSendLocation"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_image"
+            android:backgroundTint="@color/cultured"
+            android:padding="@dimen/_10sdp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_round_photo_camera_24"
+                android:backgroundTint="@color/space_cadet" />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Camera"
+            android:textColor="@color/cultured"
+            android:textSize="@dimen/_12sdp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/btnPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/btnFile"
+        app:layout_constraintStart_toEndOf="@id/btnCamera"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_image"
+            android:backgroundTint="@color/cultured"
+            android:padding="@dimen/_10sdp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_round_image_24"
+                android:backgroundTint="@color/space_cadet" />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Photo"
+            android:textColor="@color/cultured"
+            android:textSize="@dimen/_12sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnPhoto"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_image"
+            android:backgroundTint="@color/cultured"
+            android:padding="@dimen/_10sdp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_round_attachment_24"
+                android:backgroundTint="@color/space_cadet" />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="File"
+            android:textColor="@color/cultured"
+            android:textSize="@dimen/_12sdp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

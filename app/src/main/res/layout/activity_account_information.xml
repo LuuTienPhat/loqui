@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cultured"
+    tools:context=".activities.settings.MeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/space_cadet"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_25sdp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/background_image"
+                android:backgroundTint="@color/azureish_white"
+                android:scaleType="centerCrop"
+                android:src="@drawable/images_avatar"
+                app:riv_oval="true" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/cultured"
+                android:textSize="@dimen/_16ssp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/lyStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvStatusIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:textSize="@dimen/_12ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvStatusName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/cultured"
+                    android:textSize="@dimen/_10ssp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:id="@+id/btnMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/background_image"
+                    android:backgroundTint="@color/space_cadet">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_round_chat_24"
+                        android:backgroundTint="@color/cultured" />
+                </FrameLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Chat"
+                    android:textColor="@color/space_cadet"
+                    android:textSize="@dimen/_10ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <FrameLayout
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/background_image"
+                    android:backgroundTint="@color/space_cadet">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_baseline_phone_24"
+                        android:backgroundTint="@color/cultured" />
+                </FrameLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Audio"
+                    android:textColor="@color/space_cadet"
+                    android:textSize="@dimen/_10ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnCallVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <FrameLayout
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/background_image"
+                    android:backgroundTint="@color/space_cadet">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_round_videocam_24"
+                        android:backgroundTint="@color/cultured" />
+                </FrameLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Video"
+                    android:textColor="@color/space_cadet"
+                    android:textSize="@dimen/_10ssp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etEmail"
+                style="@style/EditTextSignUpActivity"
+                android:drawableStart="@drawable/ic_baseline_email_24"
+                android:drawableLeft="@drawable/ic_baseline_email_24"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Email"
+                android:inputType="text"
+                android:textColorHint="@color/steel_blue" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etFacebookLink"
+                style="@style/EditTextSignUpActivity"
+                android:drawableStart="@drawable/ic_round_link_24"
+                android:drawableLeft="@drawable/ic_round_link_24"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Link"
+                android:visibility="gone" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:hint="UID"
+                android:visibility="gone"
+                app:hintTextColor="@color/space_cadet"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textIntEdtUID"
+                    style="@style/EditTextSignUpActivity"
+                    android:hint="UID"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/btnMakeFriend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/bg_round_corner_5"
+                    android:backgroundTint="@color/space_cadet"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_14sdp">
+
+
+                    <!--                    <androidx.appcompat.widget.AppCompatImageView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:background="@drawable/ic_round_person_add_24"-->
+                    <!--                        android:backgroundTint="@color/cultured"-->
+                    <!--                        android:padding="@dimen/_12sdp" />-->
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvMakeFriend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="Make friend"
+                        android:textAllCaps="true"
+                        android:textColor="@color/cultured"
+                        android:textSize="@dimen/_12ssp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lyInviting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/btnAccept"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_round_corner_5"
+                        android:backgroundTint="@color/space_cadet"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_10sdp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_round_check_circle_24"
+                            android:backgroundTint="@color/cultured"
+                            android:padding="@dimen/_12sdp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Accept"
+                            android:textAllCaps="true"
+                            android:textColor="@color/cultured"
+                            android:textSize="@dimen/_12ssp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnDecline"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_round_corner_5"
+                        android:backgroundTint="@color/space_cadet"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_10sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_round_cancel_24"
+                            android:backgroundTint="@color/cultured"
+                            android:padding="@dimen/_12sdp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Decline"
+                            android:textAllCaps="true"
+                            android:textColor="@color/cultured"
+                            android:textSize="@dimen/_12ssp" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnBlock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/bg_round_corner_5"
+                    android:backgroundTint="@color/azureish_white"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_round_block_24"
+                        android:backgroundTint="@color/space_cadet"
+                        android:padding="@dimen/_12sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="block"
+                        android:textAllCaps="true"
+                        android:textColor="@color/space_cadet"
+                        android:textSize="@dimen/_12ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnUnBlock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/bg_round_corner_5"
+                    android:backgroundTint="@color/space_cadet"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp"
+                    android:visibility="gone">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_round_check_24"
+                        android:backgroundTint="@color/cultured"
+                        android:padding="@dimen/_12sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="UnBlock"
+                        android:textAllCaps="true"
+                        android:textColor="@color/cultured"
+                        android:textSize="@dimen/_12ssp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

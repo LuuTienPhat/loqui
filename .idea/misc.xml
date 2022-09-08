@@ -4,40 +4,154 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable-v24/background_content_bottom.xml" value="0.1" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable-v24/background_reply_message.xml" value="0.3285" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_button.xml" value="0.2885" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_chat_input.xml" value="0.1" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_content_top.xml" value="0.1" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_icon.xml" value="0.1" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_image.xml" value="0.1" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_received_message.xml" value="0.1" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_received_message_reply.xml" value="0.3285" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_sent_message.xml" value="0.1" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_sent_message_reply.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/bg_radius_10.xml" value="0.2915" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/bg_round_corner_5.xml" value="0.313" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/bg_space_cadet_top_radius_25.xml" value="0.3145" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/bg_steel_blue_top_radius_25.xml" value="0.3145" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/bg_top_radius_10.xml" value="0.2915" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/bnv_tab_item_foreground.xml" value="0.3615" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/circular_badge.xml" value="0.2255" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/custom_cursor.xml" value="0.313" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_baseline_attach_file_24.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.36" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.313" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_baseline_lock_clock_24.xml" value="0.282" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.252" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_outline_info_24.xml" value="0.1" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_add_24.xml" value="0.306" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_check_24.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_close_24.xml" value="0.306" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_delete_24.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_download_24.xml" value="0.2135" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_navigate_next_24.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_people_24.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_save_24.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_visibility_24.xml" value="0.3675" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/login_button_bg.xml" value="0.282" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/login_edittext_bg.xml" value="0.282" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout-w1240dp/activity_account_information.xml" value="0.47891156462585033" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout-w1240dp/dialog_chat_extra.xml" value="0.45390625" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout-w1240dp/item_container_sent_location.xml" value="0.45390625" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout-w1240dp/settings_linearlayout.xml" value="0.47891156462585033" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout-w936dp/activity_crop.xml" value="0.275" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout-w936dp/activity_otp_verify.xml" value="0.275" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout-w936dp/item_container_recent_conversion.xml" value="0.23333333333333334" />
-        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_chat.xml" value="0.3434343434343434" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_account_information.xml" value="0.33" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_active_status.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_add_group_member.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_archived_chat.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_attachment.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_attachment_activty.xml" value="0.2894399315946986" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_change_password.xml" value="0.33" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_chat.xml" value="0.33" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_chat_2.xml" value="0.27692307692307694" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_create_group.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_crop.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_custom_group.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_custom_status.xml" value="0.25" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_facebook_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_forgot_password.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_forward.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_friend.xml" value="0.2894399315946986" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_group_member.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_image_view.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_incoming_call.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_incoming_calling.xml" value="0.25" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_info.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_legal_policy.xml" value="0.33" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_main2.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_main2.xml" value="0.25" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_main_old.xml" value="0.25" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_me.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_message_request.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_nickname.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_otp_send.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_otp_verify.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_outgoing_call.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_rename_group.xml" value="0.33" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_setting_dark_mode.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_sign_in.xml" value="0.3611111111111111" />
-        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_sign_up.xml" value="0.24260355029585798" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_settings.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_settings_notification.xml" value="0.5" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_status.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_users.xml" value="0.31203703703703706" />
-        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/fragment_chat.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_chat_extra.xml" value="0.1" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_chat_option.xml" value="0.33" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_chat_option_bk.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_confirm.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_conversation_extra.xml" value="0.5" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_frienf_request.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_member.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_nick_name.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_nickname.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_notification.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/dialog_number_picker.xml" value="0.1483539974348012" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/fragment_call.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/fragment_chat.xml" value="0.33" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/fragment_list.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/fragment_people.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/fragment_settings.xml" value="0.3625" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_call_history.xml" value="0.33" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_chat_friend.xml" value="0.1875" />
-        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_received_message.xml" value="0.30277777777777776" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_attachment.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_conversation.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_member.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_memeber.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_message_location.xml" value="0.30012825994014536" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_message_status.xml" value="0.33" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_received_location.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_received_media.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_received_message.xml" value="0.5" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_received_message_reply.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_recent_conversion.xml" value="0.3111111111111111" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_sent_location.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_sent_media.xml" value="0.5" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_sent_message.xml" value="0.30277777777777776" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_sent_message_reply.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_status.xml" value="0.30012825994014536" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_user.xml" value="0.25" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_user_attachment.xml" value="0.5" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_user_avatar.xml" value="0.9" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_user_call.xml" value="0.33" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_user_check_box.xml" value="0.33" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_user_checkbox.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_user_forward.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_user_nickname.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_user_old.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_container_user_send.xml" value="0.5" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_file.xml" value="0.5" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_friend.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_image.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/item_user_close.xml" value="0.27421875" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/settings_activity.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/settings_linearlayout.xml" value="0.33" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/bottom_app_bar.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.18" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/crop_acticvity_menu.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_app_bar.xml" value="0.365625" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_activity_friend.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_add_group_member.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_chat_activity.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_create_group.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_custom_status.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_group_member.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_image_view_activity.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_search.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_status_activity.xml" value="0.33" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_message_bar.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/xml/root_preferences.xml" value="0.36666666666666664" />
       </map>

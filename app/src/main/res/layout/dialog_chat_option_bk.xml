@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/space_cadet"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/_20sdp"
+    android:paddingVertical="@dimen/_30sdp">
+
+    <LinearLayout
+        android:id="@+id/btnReply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/background_image"
+            android:backgroundTint="@color/cultured">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_round_reply_24"
+                android:backgroundTint="@color/space_cadet" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Reply"
+            android:textColor="@color/cultured"
+            android:textSize="@dimen/_10ssp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/btnCopy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/background_image"
+            android:backgroundTint="@color/cultured">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_round_content_copy_24"
+                android:backgroundTint="@color/space_cadet" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Copy"
+            android:textColor="@color/cultured"
+            android:textSize="@dimen/_10ssp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/btnForward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/background_image"
+            android:backgroundTint="@color/cultured">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_round_forward_24"
+                android:backgroundTint="@color/space_cadet" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Forward"
+            android:textColor="@color/cultured"
+            android:textSize="@dimen/_10ssp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/btnRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/background_image"
+            android:backgroundTint="@color/cultured">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_round_delete_24"
+                android:backgroundTint="@color/space_cadet" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Remove"
+            android:textColor="@color/cultured"
+            android:textSize="@dimen/_10ssp" />
+
+    </LinearLayout>
+
+</LinearLayout>
