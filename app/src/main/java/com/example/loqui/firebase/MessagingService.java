@@ -19,6 +19,7 @@ import com.example.loqui.constants.CallResponse;
 import com.example.loqui.constants.Constants;
 import com.example.loqui.constants.NotificationType;
 import com.example.loqui.constants.Receiver;
+import com.example.loqui.constants.RoomType;
 import com.example.loqui.data.model.CallDetail;
 import com.example.loqui.data.model.Room;
 import com.example.loqui.data.model.User;
@@ -54,6 +55,7 @@ public class MessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
 //        Timber.tag("FCM").d("Message: %s", remoteMessage.getNotification().getBody());
         PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
 
         String notificationType = remoteMessage.getData().get(Keys.KEY_NOTIFICATION_TYPE);
         if (notificationType.equals(NotificationType.MESSAGE) && !preferenceManager.getBoolean(Keys.KEY_SETTING_DO_NOT_DISTURB)) {
@@ -63,8 +65,6 @@ public class MessagingService extends FirebaseMessagingService {
         else if (notificationType.equals(NotificationType.CALL)) {
 
             try {
-                FirebaseFirestore database = FirebaseFirestore.getInstance();
-
                 CallDetail call = new CallDetail();
                 call.setId(remoteMessage.getData().get(Constants.CALL_ID));
                 call.setCallType(remoteMessage.getData().get(Constants.CALL_TYPE));
@@ -83,6 +83,7 @@ public class MessagingService extends FirebaseMessagingService {
                 if (remoteMessage.getData().get(Keys.KEY_ROOM_ID) != null) {
                     Room room = new Room();
                     room.setId(remoteMessage.getData().get(Keys.KEY_ROOM_ID));
+                    room.setType(remoteMessage.getData().get(Constants.ROOM_TYPE));
                     call.setRoom(room);
                 }
 
@@ -108,23 +109,43 @@ public class MessagingService extends FirebaseMessagingService {
 //                }
 //            }
 
-
+                // Nếu người gọi nhận được DECLINE (do người nhận gửi)
                 if (remoteMessage.getData().get(Keys.KEY_CALL_RESPONSE).equals(CallResponse.DECLINE_INVITATION)) {
                     //if (call.getParticipants().size() == 1) {
 //                    if (IncomingCallActivity.incomingCallActivity != null) {
 //                        IncomingCallActivity.incomingCallActivity.finish();
 //                    }
-                    sendBroadcast(new Intent(Receiver.CLOSE_OUTGOING_CALL_ACTIVITY));
+                    if (call.getRoom().getType().equals(RoomType.TWO)) { // Nếu phòng chỉ có 2 người
+                        sendBroadcast(new Intent(Receiver.CLOSE_OUTGOING_CALL_ACTIVITY));
+                    } else { // Nếu phòng có nhiều người
+                        Intent intent = new Intent(Receiver.JOIN_OUTGOING_CALL_ACTIVITY);
+                        intent.putExtra(Keys.KEY_USER_ID, remoteMessage.getData().get(Keys.KEY_USER_ID));
+                        sendBroadcast(intent);
+                    }
+
                     // }
                 }
 
+                // Nếu người nhận cuộc gọi nhận được CANCEL (do người gọi gửi)
                 if (remoteMessage.getData().get(Keys.KEY_CALL_RESPONSE).equals(CallResponse.CANCEL_INVITATION)) {
-                    if (IncomingCallActivity.incomingCallActivity != null) {
-                        IncomingCallActivity.incomingCallActivity.finish();
-                    }
+//                    if (IncomingCallActivity.incomingCallActivity != null) {
+//                        IncomingCallActivity.incomingCallActivity.finish();
+//                    }
 
+                    sendBroadcast(new Intent(Receiver.CLOSE_INCOMING_CALL_ACTIVITY));
 
-                } else if (remoteMessage.getData().get(Keys.KEY_CALL_RESPONSE).equals(CallResponse.ACCEPT_INVITATION)) {
+//                    if (call.getRoom().getType().equals(RoomType.TWO)) { // Nếu phòng chỉ có 2 người
+//
+//                    } else { // Nếu phòng có nhiều người
+//
+//                    }
+
+                }
+//
+//
+//                } else
+                // Nếu người gọi nhận được ACCEPT (do người nhận gửi)
+                if (remoteMessage.getData().get(Keys.KEY_CALL_RESPONSE).equals(CallResponse.ACCEPT_INVITATION)) {
 //                Intent intent = new Intent(this, Jit)
 //                if (!remoteMessage.getData().get(Keys.KEY_SENDER_ID).equals(call.getId())) {
 //                Intent intent = new Intent(this, JitsiActivity.class);

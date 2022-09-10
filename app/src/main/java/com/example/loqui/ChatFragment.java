@@ -230,22 +230,28 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
         Tasks.whenAllSuccess(t1)
                 .addOnSuccessListener(objects -> {
                     if (!this.rooms.isEmpty()) {
-                        Task<QuerySnapshot> t2 = database.collection(Keys.KEY_COLLECTION_ROOM)
-                                .whereIn(Keys.KEY_ID, rooms)
-                                .get()
-                                .addOnSuccessListener(queryDocumentSnapshots1 -> {
-                                    if (!queryDocumentSnapshots1.getDocuments().isEmpty()) {
-                                        //List<String> hiddenRoom = new ArrayList<>();
-                                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots1.getDocuments()) {
-                                            String roomStatus = documentSnapshot.getString(Keys.KEY_STATUS);
-                                            if (roomStatus.equals(RoomStatus.DELETED) | roomStatus.equals(RoomStatus.REQUESTED) | roomStatus.equals(RoomStatus.ARCHIVED)) {
-                                                //hiddenRoom.add(documentSnapshot.getString(Keys.KEY_ID));
-                                                this.rooms.remove(documentSnapshot.getString(Keys.KEY_ID));
+
+                        List<List<String>> subList = new ArrayList<>();
+                        for (int i = 0; i < rooms.size(); i += 10) {
+                            subList.add(rooms.subList(i, Math.min(i + 10, rooms.size())));
+                        }
+
+                        subList.forEach(strings -> {
+                            Task<QuerySnapshot> t2 = database.collection(Keys.KEY_COLLECTION_ROOM)
+                                    .whereIn(Keys.KEY_ID, strings)
+                                    .get()
+                                    .addOnSuccessListener(queryDocumentSnapshots1 -> {
+                                        if (!queryDocumentSnapshots1.getDocuments().isEmpty()) {
+                                            //List<String> hiddenRoom = new ArrayList<>();
+                                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots1.getDocuments()) {
+                                                String roomStatus = documentSnapshot.getString(Keys.KEY_STATUS);
+                                                if (roomStatus.equals(RoomStatus.DELETED) | roomStatus.equals(RoomStatus.REQUESTED) | roomStatus.equals(RoomStatus.ARCHIVED)) {
+                                                    //hiddenRoom.add(documentSnapshot.getString(Keys.KEY_ID));
+                                                    this.rooms.remove(documentSnapshot.getString(Keys.KEY_ID));
+                                                }
                                             }
-                                        }
 
-                                        listenConversations();
-
+                                            listenConversations();
 //                                        database.collection(Keys.KEY_COLLECTION_CHAT)
 //                                                .whereIn(Keys.KEY_ROOM_ID, this.rooms)
 //                                                .orderBy(Keys.KEY_CREATED_DATE, Query.Direction.DESCENDING)
@@ -283,10 +289,13 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
 //                                                    loading(false);
 //                                                });
 
-                                    } else {
-                                        loading(false);
-                                    }
-                                });
+                                        } else {
+                                            loading(false);
+                                        }
+                                    });
+                        });
+
+
                     } else {
                         loading(false);
                     }
@@ -294,7 +303,6 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
                 }).addOnFailureListener(e -> {
                     loading(false);
                 });
-
     }
 
     private int findChatMessage(String chatMessageId) {

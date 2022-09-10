@@ -12,6 +12,7 @@ import com.example.loqui.SignInActivity;
 import com.example.loqui.constants.Constants;
 import com.example.loqui.constants.StatusStatus;
 import com.example.loqui.data.model.Status;
+import com.example.loqui.databinding.ActivitySettingsBinding;
 import com.example.loqui.utils.Keys;
 import com.example.loqui.utils.MyToast;
 import com.example.loqui.utils.PreferenceManager;

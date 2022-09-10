@@ -1,15 +1,20 @@
 package com.example.loqui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.loqui.constants.CallResponse;
 import com.example.loqui.constants.Constants;
 import com.example.loqui.constants.MessageType;
 import com.example.loqui.constants.NotificationType;
+import com.example.loqui.constants.Receiver;
 import com.example.loqui.data.model.CallDetail;
 import com.example.loqui.data.model.Room;
 import com.example.loqui.data.model.User;
@@ -24,6 +29,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import org.jitsi.meet.sdk.BroadcastEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,7 +37,7 @@ import java.io.Serializable;
 
 public class IncomingCallActivity extends AppCompatActivity {
 
-    public static IncomingCallActivity incomingCallActivity;
+    //public static IncomingCallActivity incomingCallActivity;
     private ActivityIncomingCallBinding binding;
     private PreferenceManager preferenceManager;
     private FirebaseFirestore database;
@@ -42,6 +48,13 @@ public class IncomingCallActivity extends AppCompatActivity {
     //    private String callId;
     private CallDetail call;
     private User me;
+
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            onBroadcastReceived(intent);
+        }
+    };
 
 //    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 //        @Override
@@ -61,7 +74,7 @@ public class IncomingCallActivity extends AppCompatActivity {
         binding = ActivityIncomingCallBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        incomingCallActivity = this;
+        //incomingCallActivity = this;
 
         init();
         binding.btnAccept.setOnClickListener(v -> {
@@ -72,6 +85,7 @@ public class IncomingCallActivity extends AppCompatActivity {
             onBtnDeclinedClicked();
         });
 
+        registerForBroadcastMessages();
 
         //this.roomId = getIntent().getExtras().getString(Constants.ROOM);
 //        getRoom(this.roomId);
@@ -93,40 +107,40 @@ public class IncomingCallActivity extends AppCompatActivity {
             binding.ivCallType.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_round_videocam_24));
         }
 
-        if (call.getRoom() != null) {
-            database.collection(Keys.KEY_COLLECTION_ROOM)
-                    .document(call.getRoom().getId())
-                    .get()
-                    .addOnSuccessListener(documentSnapshot -> {
-                        Room room = new Room();
-                        room.setId(documentSnapshot.getString(Keys.KEY_ID));
-                        room.setName(documentSnapshot.getString(Keys.KEY_NAME));
-                        room.setAvatar(documentSnapshot.getString(Keys.KEY_AVATAR));
-                        call.setRoom(room);
+//        if (call.getRoom() != null) {
+//            database.collection(Keys.KEY_COLLECTION_ROOM)
+//                    .document(call.getRoom().getId())
+//                    .get()
+//                    .addOnSuccessListener(documentSnapshot -> {
+//                        Room room = new Room();
+//                        room.setId(documentSnapshot.getString(Keys.KEY_ID));
+//                        room.setName(documentSnapshot.getString(Keys.KEY_NAME));
+//                        room.setAvatar(documentSnapshot.getString(Keys.KEY_AVATAR));
+//                        call.setRoom(room);
+//
+//                        binding.tvName.setText(room.getName());
+//                        binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(room.getAvatar()));
+//                    });
+//        } else {
+        FirebaseHelper.findUser(database, call.getCaller().getId())
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
+                        DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
 
-                        binding.tvName.setText(room.getName());
-                        binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(room.getAvatar()));
-                    });
-        } else {
-            FirebaseHelper.findUser(database, call.getCaller().getId())
-                    .addOnSuccessListener(queryDocumentSnapshots -> {
-                        if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
-                            DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                        User caller = new User();
+                        caller.setId(documentSnapshot.getString(Keys.KEY_ID));
+                        caller.setImage(documentSnapshot.getString(Keys.KEY_AVATAR));
+                        caller.setLastName(documentSnapshot.getString(Keys.KEY_LASTNAME));
+                        caller.setFirstName(documentSnapshot.getString(Keys.KEY_FIRSTNAME));
+                        caller.setToken(documentSnapshot.getString(Keys.KEY_FCM_TOKEN));
 
-                            User caller = new User();
-                            caller.setId(documentSnapshot.getString(Keys.KEY_ID));
-                            caller.setImage(documentSnapshot.getString(Keys.KEY_AVATAR));
-                            caller.setLastName(documentSnapshot.getString(Keys.KEY_LASTNAME));
-                            caller.setFirstName(documentSnapshot.getString(Keys.KEY_FIRSTNAME));
-                            caller.setToken(documentSnapshot.getString(Keys.KEY_FCM_TOKEN));
+                        call.setCaller(caller);
 
-                            call.setCaller(caller);
-
-                            binding.tvName.setText(call.getCaller().getFullName());
-                            binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(call.getCaller().getImage()));
-                        }
-                    });
-        }
+                        binding.tvName.setText(call.getCaller().getFullName());
+                        binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(call.getCaller().getImage()));
+                    }
+                });
+        //}
 
         me = new User();
         me.setId(preferenceManager.getString(Keys.KEY_USER_ID));
@@ -272,6 +286,8 @@ public class IncomingCallActivity extends AppCompatActivity {
             data.put(Constants.CALL_TYPE, call.getCallType());
             data.put(Keys.KEY_CREATED_DATE, Utils.currentTimeMillis());
 
+            data.put(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID));
+
 //            if (this.receivers.size() > 1) {
 //                data.put(Keys.KEY_ROOM_ID, room.getId());
 //            }
@@ -367,4 +383,51 @@ public class IncomingCallActivity extends AppCompatActivity {
 //        super.onStop();
 //        unregisterReceiver(broadcastReceiver);
 //    }
+
+    private void registerForBroadcastMessages() {
+        IntentFilter intentFilter = new IntentFilter();
+
+        /* This registers for every possible event sent from JitsiMeetSDK
+           If only some of the events are needed, the for loop can be replaced
+           with individual statements:
+           ex:  intentFilter.addAction(BroadcastEvent.Type.AUDIO_MUTED_CHANGED.getAction());
+                intentFilter.addAction(BroadcastEvent.Type.CONFERENCE_TERMINATED.getAction());
+                ... other events
+         */
+        for (BroadcastEvent.Type type : BroadcastEvent.Type.values()) {
+            intentFilter.addAction(type.getAction());
+        }
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    // Example for handling different JitsiMeetSDK events
+    private void onBroadcastReceived(Intent intent) {
+        if (intent != null) {
+            BroadcastEvent event = new BroadcastEvent(intent);
+
+//            switch (event.getType().getAction()) {
+//                case Receiver
+//                        .CLOSE_INCOMING_CALL_ACTIVITY:
+//
+//                    break;
+//                case Receiver.CLOSE_INCOMING_CALL_ACTIVITY:
+//                    //participantCount++;
+//                    Timber.i("Participant joined%s", event.getData().get("name"));
+//                    break;
+////                case CONFERENCE_TERMINATED:
+////                    break;
+//            }
+
+            if (event.getType().getAction().equals(Receiver.CLOSE_INCOMING_CALL_ACTIVITY)) {
+                finish();
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+        super.onDestroy();
+    }
 }
