@@ -28,14 +28,14 @@
         app:layout_constraintStart_toStartOf="@id/tvReplyMessage"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/_10sdp"
             android:layout_height="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_3sdp"
             android:background="@drawable/ic_round_reply_24"
             android:backgroundTint="@color/secondary_text" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/rvListReplyTo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

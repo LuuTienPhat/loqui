@@ -11,13 +11,21 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.loqui.constants.Constants;
 import com.example.loqui.constants.MessageType;
+import com.example.loqui.constants.RecipientStatus;
 import com.example.loqui.data.model.CallDetail;
 import com.example.loqui.data.model.User;
 import com.example.loqui.utils.FirebaseHelper;
 import com.example.loqui.utils.Keys;
 import com.example.loqui.utils.PreferenceManager;
+import com.example.loqui.utils.Utils;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jitsi.meet.sdk.BroadcastEvent;
 import org.jitsi.meet.sdk.BroadcastIntentHelper;
@@ -27,6 +35,9 @@ import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import timber.log.Timber;
 
@@ -37,6 +48,9 @@ public class JitsiActivity extends AppCompatActivity {
     private CallDetail call;
     private User me;
     private Integer participantCount = null;
+    private List<String> participants; // tính luôn cả admin
+
+    private ListenerRegistration listenerRegistration = null;
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -53,7 +67,12 @@ public class JitsiActivity extends AppCompatActivity {
         initJitsi();
         init();
 
+
         registerForBroadcastMessages();
+
+        listenerRegistration = database.collection(Keys.KEY_COLLECTION_RECIPIENT)
+                .whereEqualTo(Keys.KEY_ROOM_ID, call.getId())
+                .addSnapshotListener(recipientListener);
     }
 
     private void init() {
@@ -68,6 +87,9 @@ public class JitsiActivity extends AppCompatActivity {
         this.me.setLastName(preferenceManager.getString(Keys.KEY_LASTNAME));
 
         participantCount = 0;
+        this.participants = new ArrayList<>();
+
+        acceptCall();
 
         if (call.getRoom() != null) {
             database.collection(Keys.KEY_COLLECTION_ROOM)
@@ -93,6 +115,82 @@ public class JitsiActivity extends AppCompatActivity {
                     });
         }
     }
+
+    private void acceptCall() {
+        //if (!this.me.getId().equals(call.getCaller().getId())) { // Người tham gia không phải là người gọi thì đổi thành accept
+        database.collection(Keys.KEY_COLLECTION_RECIPIENT)
+                .whereEqualTo(Keys.KEY_ROOM_ID, call.getId())
+                .whereEqualTo(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID))
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
+                        DocumentReference reference = queryDocumentSnapshots.getDocuments().get(0).getReference();
+                        reference.update(Keys.KEY_STATUS, RecipientStatus.ACCEPT);
+                    }
+                });
+        // }
+    }
+
+    private void cancelCall() {
+        if (this.me.getId().equals(call.getCaller().getId())) { // Người gọi hủy cuộc gọi
+            database.collection(Keys.KEY_COLLECTION_RECIPIENT)
+                    .whereEqualTo(Keys.KEY_ROOM_ID, call.getId())
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
+                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+                                DocumentReference reference = documentSnapshot.getReference();
+                                reference.update(Keys.KEY_STATUS, RecipientStatus.DECLINE);
+                            }
+                        }
+                    });
+        } else { // nếu một trong những người nghe rời phòng
+            database.collection(Keys.KEY_COLLECTION_RECIPIENT)
+                    .whereEqualTo(Keys.KEY_ROOM_ID, call.getId())
+                    .whereEqualTo(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID))
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
+                            DocumentReference reference = queryDocumentSnapshots.getDocuments().get(0).getReference();
+                            reference.update(Keys.KEY_STATUS, RecipientStatus.DECLINE);
+                        }
+                    });
+        }
+    }
+
+    private final EventListener<QuerySnapshot> recipientListener = (value, error) -> {
+//        loading(true);
+        if (error != null) {
+//            loading(false);
+            return;
+        }
+        if (value != null) {
+            for (DocumentChange documentChange : value.getDocumentChanges()) {
+                QueryDocumentSnapshot queryDocumentSnapshot = documentChange.getDocument();
+
+                if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                    if (!queryDocumentSnapshot.getString(Keys.KEY_STATUS).equals(RecipientStatus.DECLINE)) {
+                        participants.add(queryDocumentSnapshot.getString(Keys.KEY_USER_ID));
+                    }
+                }
+
+                if (documentChange.getType() == DocumentChange.Type.MODIFIED) {
+                    if (queryDocumentSnapshot.getString(Keys.KEY_STATUS).equals(RecipientStatus.DECLINE)) {
+                        participants.remove(queryDocumentSnapshot.getString(Keys.KEY_USER_ID));
+
+                        if (participants.size() == 1) {
+                            sendMessage();
+                            stop();
+                        }
+                    }
+
+                    if (queryDocumentSnapshot.getString(Keys.KEY_STATUS).equals(RecipientStatus.ACCEPT)) {
+                        participants.add(queryDocumentSnapshot.getString(Keys.KEY_USER_ID));
+                    }
+                }
+            }
+        }
+    };
 
     private void initJitsi() {
         // Initialize default options for Jitsi Meet conferences.
@@ -179,11 +277,12 @@ public class JitsiActivity extends AppCompatActivity {
                     Timber.i("Conference Joined with url%s", event.getData().get("url"));
                     break;
                 case PARTICIPANT_JOINED:
-                    participantCount++;
+                    //participantCount++;
                     Timber.i("Participant joined%s", event.getData().get("name"));
                     break;
                 case CONFERENCE_TERMINATED:
-                    finish();
+                    cancelCall();
+                    stop();
                     break;
             }
         }
@@ -200,12 +299,28 @@ public class JitsiActivity extends AppCompatActivity {
     private void hangUp() {
         Intent hangupBroadcastIntent = BroadcastIntentHelper.buildHangUpIntent();
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(hangupBroadcastIntent);
-        finish();
     }
 
     @Override
     protected void onDestroy() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
         super.onDestroy();
+    }
+
+    private void sendMessage() {
+        String messageContent = this.me.getFullName() + " started" + (call.getCallType().equals(MessageType.AUDIO_CALL) ? " an audio call" : " a video call");
+        HashMap<String, Object> message = new HashMap<>();
+        String messageId = FirebaseHelper.generateId(database, Keys.KEY_COLLECTION_CHAT);
+        message.put(Keys.KEY_ID, messageId);
+        message.put(Keys.KEY_ROOM_ID, call.getRoom().getId());
+        message.put(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID));
+        message.put(Keys.KEY_MESSAGE, messageContent);
+        message.put(Keys.KEY_REPLY_ID, "");
+        message.put(Keys.KEY_STATUS, "");
+        message.put(Keys.KEY_TYPE, call.getCallType().equals(MessageType.AUDIO_CALL) ? MessageType.AUDIO_CALL : MessageType.VIDEO_CALL);
+        message.put(Keys.KEY_CREATED_DATE, Utils.currentTimeMillis());
+        message.put(Keys.KEY_MODIFIED_DATE, Utils.currentTimeMillis());
+        database.collection(Keys.KEY_COLLECTION_CHAT).document(messageId).set(message);
+
     }
 }

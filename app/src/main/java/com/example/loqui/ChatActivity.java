@@ -70,7 +70,7 @@ import java.util.List;
 
 import timber.log.Timber;
 
-public class ChatActivity extends BaseActivity implements ExtraChatDialog.Listener, ChatOptionDialog.Listener {
+public class ChatActivity extends BaseActivity implements ExtraChatDialog.Listener, ChatOptionDialog.Listener, ChatAdapter.Listener {
 
     private ActivityChatBinding binding;
     //    private User receivedUser;
@@ -202,7 +202,7 @@ public class ChatActivity extends BaseActivity implements ExtraChatDialog.Listen
 //                                                                    unBlock();
 //                                                                });
 //                                                            }
-                                                            chatAdapter = new ChatAdapter(this, chatMessages, receivers, preferenceManager);
+                                                            chatAdapter = new ChatAdapter(this, chatMessages, receivers, preferenceManager, this);
                                                             binding.chatRecyclerView.setAdapter(chatAdapter);
 
 //                                            getRoom(roomId);
@@ -283,7 +283,7 @@ public class ChatActivity extends BaseActivity implements ExtraChatDialog.Listen
                                                                     unBlock();
                                                                 });
                                                             }
-                                                            chatAdapter = new ChatAdapter(this, chatMessages, receivers, preferenceManager);
+                                                            chatAdapter = new ChatAdapter(this, chatMessages, receivers, preferenceManager, this);
                                                             binding.chatRecyclerView.setAdapter(chatAdapter);
 
 //                                            getRoom(roomId);
@@ -1217,5 +1217,14 @@ public class ChatActivity extends BaseActivity implements ExtraChatDialog.Listen
         }
         finish();
         super.onBackPressed();
+    }
+
+    @Override
+    public void sendDialogResult(ChatAdapter.Result result, ChatMessage chatMessage) {
+        if (result == ChatAdapter.Result.AUDIO_CALL) {
+            handleOnBtnCallClicked();
+        } else if (result == ChatAdapter.Result.VIDEO_CALL) {
+            handleOnBtnCallVideoClicked();
+        }
     }
 }

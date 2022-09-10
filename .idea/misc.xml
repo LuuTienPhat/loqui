@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable-v24/background_content_bottom.xml" value="0.1" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable-v24/background_reply_message.xml" value="0.3285" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3675" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_button.xml" value="0.2885" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_chat_input.xml" value="0.1" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_content_top.xml" value="0.1" />
@@ -14,6 +15,7 @@
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_received_message_reply.xml" value="0.3285" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_sent_message.xml" value="0.1" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_sent_message_reply.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/background_splash.xml" value="0.3665" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/bg_radius_10.xml" value="0.2915" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/bg_round_corner_5.xml" value="0.313" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/bg_space_cadet_top_radius_25.xml" value="0.3145" />
@@ -28,6 +30,9 @@
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.313" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_baseline_lock_clock_24.xml" value="0.282" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.252" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_launcher.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3675" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_outline_info_24.xml" value="0.1" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_add_24.xml" value="0.306" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/drawable/ic_round_check_24.xml" value="0.3675" />
@@ -61,6 +66,7 @@
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_custom_group.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_custom_status.xml" value="0.25" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_facebook_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_file_view.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_forgot_password.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_forward.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/layout/activity_friend.xml" value="0.2894399315946986" />
@@ -153,6 +159,8 @@
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_search.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_menu_status_activity.xml" value="0.33" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/menu/top_message_bar.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3675" />
+        <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.129" />
         <entry key="..\:/Users/Phat/Documents/AndroidStudioProjects/loqui/app/src/main/res/xml/root_preferences.xml" value="0.36666666666666664" />
       </map>
     </option>

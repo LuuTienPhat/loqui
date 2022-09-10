@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.loqui.FileViewActivity;
 import com.example.loqui.ImageViewActivity;
 import com.example.loqui.R;
 import com.example.loqui.constants.Constants;
@@ -35,6 +37,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    public enum Result {
+        AUDIO_CALL, VIDEO_CALL
+    }
+
+    public interface Listener {
+        void sendDialogResult(ChatAdapter.Result result, ChatMessage chatMessage);
+    }
+
     private final List<ChatMessage> chatMessages;
     private final List<User> receivers;
 //    private final String senderId;
@@ -49,6 +60,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final AppCompatActivity activity;
     private final PreferenceManager preferenceManager;
+    private final ChatAdapter.Listener listener;
 //    private final FragmentManager fragmentManager;
 
 
@@ -58,11 +70,12 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //        this.receivedProfileImage = receivedProfileImage;
 //    }
 
-    public ChatAdapter(AppCompatActivity activity, List<ChatMessage> chatMessages, List<User> receivers, PreferenceManager preferenceManager) {
+    public ChatAdapter(AppCompatActivity activity, List<ChatMessage> chatMessages, List<User> receivers, PreferenceManager preferenceManager, ChatAdapter.Listener listener) {
         this.chatMessages = chatMessages;
         this.activity = activity;
         this.receivers = receivers;
         this.preferenceManager = preferenceManager;
+        this.listener = listener;
 //        this.fragmentManager = fragmentManager;
 //        this.senderId = senderId;
 //        this.receivedProfileImage = receivedProfileImage;
@@ -333,11 +346,11 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                                             binding.tvFileName.setText(attachments.get(0).getFullName());
                                             binding.tvFileSize.setText(Utils.humanReadableByteCountSI(Long.parseLong(attachments.get(0).getSize())));
 
-//                                            binding.getRoot().setOnClickListener(v -> {
-//                                                Intent intent = new Intent(activity.getApplicationContext(), ImageViewActivity.class);
-//                                                intent.putExtra(Constants.ATTACHMENT, attachments.get(0));
-//                                                activity.startActivity(intent);
-//                                            });
+                                            binding.getRoot().setOnClickListener(v -> {
+                                                Intent intent = new Intent(activity.getApplicationContext(), FileViewActivity.class);
+                                                intent.putExtra(Constants.ATTACHMENT, attachments.get(0));
+                                                activity.startActivity(intent);
+                                            });
 
 //                                            Glide.with(activity.getApplicationContext())
 //                                                    .load(attachments.get(0).getPath())
@@ -351,6 +364,39 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //                    Attachment attachment = chatMessage.getAttachment();
 //                    binding.tvFileName.setText(attachment.getFullName());
 //                    binding.tvFileSize.setText(attachment.getSize());
+
+                }
+                if (chatMessage.getType().equals(MessageType.AUDIO_CALL) | chatMessage.getType().equals(MessageType.VIDEO_CALL)) {
+                    if (chatMessage.getType().equals(MessageType.AUDIO_CALL)) {
+                        binding.ivCallType.setBackground(ContextCompat.getDrawable(activity.getApplicationContext(), R.drawable.ic_round_call_24));
+                        binding.tvCallType.setText("Audio Call");
+
+                        binding.getRoot().setOnClickListener(v -> {
+                            listener.sendDialogResult(Result.AUDIO_CALL, chatMessage);
+                        });
+
+
+                    } else if (chatMessage.getType().equals(MessageType.VIDEO_CALL)) {
+                        binding.ivCallType.setBackground(ContextCompat.getDrawable(activity.getApplicationContext(), R.drawable.ic_round_videocam_24));
+                        binding.tvCallType.setText("Video Call");
+
+                        binding.getRoot().setOnClickListener(v -> {
+                            listener.sendDialogResult(Result.VIDEO_CALL, chatMessage);
+                        });
+                    }
+
+
+//                    binding.getRoot().setOnClickListener(v -> {
+//                        String message = chatMessage.getMessage();
+//                        String[] coordinate = message.split(",");
+//                        String latitude = coordinate[0];
+//                        String longitude = coordinate[1];
+//
+//                        String strUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude;
+//                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+//                        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+//                        activity.startActivity(intent);
+//                    });
 
                 } else {
                     binding.tvMessage.setText(chatMessage.getMessage());
@@ -366,21 +412,31 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 binding.ivImage.setVisibility(View.GONE);
                 binding.lyFile.setVisibility(View.GONE);
                 binding.lyLocation.setVisibility(View.GONE);
+                binding.lyCall.setVisibility(View.GONE);
             } else if (type.equals(MessageType.FILE)) {
                 binding.tvMessage.setVisibility(View.GONE);
                 binding.ivImage.setVisibility(View.GONE);
                 binding.lyFile.setVisibility(View.VISIBLE);
                 binding.lyLocation.setVisibility(View.GONE);
+                binding.lyCall.setVisibility(View.GONE);
             } else if (type.equals(MessageType.MEDIA)) {
                 binding.tvMessage.setVisibility(View.GONE);
                 binding.ivImage.setVisibility(View.VISIBLE);
                 binding.lyFile.setVisibility(View.GONE);
                 binding.lyLocation.setVisibility(View.GONE);
+                binding.lyCall.setVisibility(View.GONE);
             } else if (type.equals(MessageType.LOCATION)) {
                 binding.tvMessage.setVisibility(View.GONE);
                 binding.ivImage.setVisibility(View.GONE);
                 binding.lyFile.setVisibility(View.GONE);
                 binding.lyLocation.setVisibility(View.VISIBLE);
+                binding.lyCall.setVisibility(View.GONE);
+            } else if (type.equals(MessageType.AUDIO_CALL) | type.equals(MessageType.AUDIO_CALL)) {
+                binding.tvMessage.setVisibility(View.GONE);
+                binding.ivImage.setVisibility(View.GONE);
+                binding.lyFile.setVisibility(View.GONE);
+                binding.lyLocation.setVisibility(View.GONE);
+                binding.lyCall.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -570,6 +626,38 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         activity.startActivity(intent);
                     });
 
+                }
+                if (chatMessage.getType().equals(MessageType.AUDIO_CALL) | chatMessage.getType().equals(MessageType.VIDEO_CALL)) {
+                    if (chatMessage.getType().equals(MessageType.AUDIO_CALL)) {
+                        binding.ivCallType.setBackground(ContextCompat.getDrawable(activity.getApplicationContext(), R.drawable.ic_round_call_24));
+                        binding.tvCallType.setText("Audio Call");
+
+                        binding.getRoot().setOnClickListener(v -> {
+                            listener.sendDialogResult(Result.AUDIO_CALL, chatMessage);
+                        });
+
+                    } else if (chatMessage.getType().equals(MessageType.VIDEO_CALL)) {
+                        binding.ivCallType.setBackground(ContextCompat.getDrawable(activity.getApplicationContext(), R.drawable.ic_round_videocam_24));
+                        binding.tvCallType.setText("Video Call");
+
+                        binding.getRoot().setOnClickListener(v -> {
+                            listener.sendDialogResult(Result.VIDEO_CALL, chatMessage);
+                        });
+                    }
+
+
+//                    binding.getRoot().setOnClickListener(v -> {
+//                        String message = chatMessage.getMessage();
+//                        String[] coordinate = message.split(",");
+//                        String latitude = coordinate[0];
+//                        String longitude = coordinate[1];
+//
+//                        String strUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude;
+//                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+//                        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+//                        activity.startActivity(intent);
+//                    });
+
                 } else {
                     binding.tvMessage.setText(chatMessage.getMessage());
                 }
@@ -585,21 +673,31 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 binding.ivImage.setVisibility(View.GONE);
                 binding.lyFile.setVisibility(View.GONE);
                 binding.lyLocation.setVisibility(View.GONE);
+                binding.lyCall.setVisibility(View.GONE);
             } else if (type.equals(MessageType.FILE)) {
                 binding.tvMessage.setVisibility(View.GONE);
                 binding.ivImage.setVisibility(View.GONE);
                 binding.lyFile.setVisibility(View.VISIBLE);
                 binding.lyLocation.setVisibility(View.GONE);
+                binding.lyCall.setVisibility(View.GONE);
             } else if (type.equals(MessageType.MEDIA)) {
                 binding.tvMessage.setVisibility(View.GONE);
                 binding.ivImage.setVisibility(View.VISIBLE);
                 binding.lyFile.setVisibility(View.GONE);
                 binding.lyLocation.setVisibility(View.GONE);
+                binding.lyCall.setVisibility(View.GONE);
             } else if (type.equals(MessageType.LOCATION)) {
                 binding.tvMessage.setVisibility(View.GONE);
                 binding.ivImage.setVisibility(View.GONE);
                 binding.lyFile.setVisibility(View.GONE);
                 binding.lyLocation.setVisibility(View.VISIBLE);
+                binding.lyCall.setVisibility(View.GONE);
+            } else if (type.equals(MessageType.AUDIO_CALL) | type.equals(MessageType.AUDIO_CALL)) {
+                binding.tvMessage.setVisibility(View.GONE);
+                binding.ivImage.setVisibility(View.GONE);
+                binding.lyFile.setVisibility(View.GONE);
+                binding.lyLocation.setVisibility(View.GONE);
+                binding.lyCall.setVisibility(View.VISIBLE);
             }
         }
 

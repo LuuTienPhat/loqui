@@ -43,4 +43,6 @@ public class Constants {
 
     public static final String OPEN_FROM_NOTIFICATION = "open_from_notification";
 
+    public static final String ROOM_TYPE = "room_type";
+
 }
