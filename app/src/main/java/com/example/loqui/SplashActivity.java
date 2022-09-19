@@ -41,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
     private void nextActivity() {
         //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (preferenceManager.getBoolean(Keys.KEY_IS_SIGNED_IN)) {
+        if (!preferenceManager.getBoolean(Keys.KEY_IS_SIGNED_IN)) {
             Intent intent = new Intent(this, SignInActivity.class);
             startActivity(intent);
         } else {

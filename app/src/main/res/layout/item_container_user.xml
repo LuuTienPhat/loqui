@@ -31,10 +31,19 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Lưu Tiến Phát"
             android:textColor="@color/space_cadet"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTextDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/steel_blue"
+            android:textSize="@dimen/_8ssp"
+            android:visibility="gone" />
 
     </LinearLayout>
 

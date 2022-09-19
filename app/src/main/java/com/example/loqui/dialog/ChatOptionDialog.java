@@ -67,13 +67,24 @@ public class ChatOptionDialog extends BottomSheetDialogFragment {
             binding.btnCopy.setVisibility(View.GONE);
         }
 
-        if (chatMessage.getType().equals(MessageType.FILE) | chatMessage.getType().equals(MessageType.MEDIA)) {
+        if (chatMessage.getType().equals(MessageType.FILE) || chatMessage.getType().equals(MessageType.MEDIA)) {
             binding.btnCopy.setVisibility(View.GONE);
         }
+
+        if (chatMessage.getType().equals(MessageType.VIDEO_CALL) || chatMessage.getType().equals(MessageType.AUDIO_CALL)) {
+            binding.btnRemove.setVisibility(View.GONE);
+            binding.btnForward.setVisibility(View.GONE);
+            binding.btnCopy.setVisibility(View.GONE);
+        }
+        if (chatMessage.getType().equals(MessageType.STATUS)) {
+            dismiss();
+        }
+
 
         if (!chatMessage.getUserId().equals(preferenceManager.getString(Keys.KEY_USER_ID))) { // Không cho phép xóa tin nhắn của người khác
             binding.btnRemove.setVisibility(View.GONE);
         }
+
 
         binding.btnCopy.setOnClickListener(v -> {
             listener.sendDialogResult(Result.COPY, chatMessage);

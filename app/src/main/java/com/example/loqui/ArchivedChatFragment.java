@@ -278,7 +278,7 @@ public class ArchivedChatFragment extends Fragment implements ConversationAdapte
                                         List<String> hiddenRoom = new ArrayList<>();
                                         for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots1.getDocuments()) {
                                             String roomStatus = documentSnapshot.getString(Keys.KEY_STATUS);
-                                            if (!roomStatus.equals(RoomStatus.DELETED) | !roomStatus.equals(RoomStatus.REQUESTED) | !roomStatus.equals(RoomStatus.ARCHIVED)) {
+                                            if (!roomStatus.equals(RoomStatus.DELETED) || !roomStatus.equals(RoomStatus.REQUESTED) | !roomStatus.equals(RoomStatus.ARCHIVED)) {
                                                 hiddenRoom.add(documentSnapshot.getString(Keys.KEY_ID));
                                             }
                                         }

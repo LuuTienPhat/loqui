@@ -208,12 +208,14 @@ public class InfoActivity extends BaseActivity implements CustomDialog.Listener 
     private void handleOnBtnCallVideoClicked() {
         Intent intent = new Intent(getApplicationContext(), OutgoingCallActivity.class);
         intent.putExtra(Constants.CALL_TYPE, MessageType.VIDEO_CALL);
+        intent.putExtra(Constants.CALL_TYPE, MessageType.VIDEO_CALL);
         intent.putExtra(Constants.RECEIVERS, (Serializable) receivers);
         startActivity(intent);
     }
 
     private void handleOnBtnCallClicked() {
         Intent intent = new Intent(getApplicationContext(), OutgoingCallActivity.class);
+        intent.putExtra(Constants.CALL_TYPE, MessageType.AUDIO_CALL);
         intent.putExtra(Constants.CALL_TYPE, MessageType.AUDIO_CALL);
         intent.putExtra(Constants.RECEIVERS, (Serializable) receivers);
         startActivity(intent);

@@ -108,6 +108,18 @@ public class MessagingService extends FirebaseMessagingService {
 //                    startActivity(intent);
 //                }
 //            }
+                // Nếu người gọi nhận được RECEIVED (do người nhận gửi)
+                if (remoteMessage.getData().get(Keys.KEY_CALL_RESPONSE).equals(CallResponse.RECEIVED_INVITATION)) {
+                    //if (call.getParticipants().size() == 1) {
+//                    if (IncomingCallActivity.incomingCallActivity != null) {
+//                        IncomingCallActivity.incomingCallActivity.finish();
+//                    }
+                    Intent intent = new Intent(Receiver.RECEIVE_OUTGOING_CALL_ACTIVITY);
+                    intent.putExtra(Keys.KEY_USER_ID, remoteMessage.getData().get(Keys.KEY_USER_ID));
+                    sendBroadcast(intent);
+
+                    // }
+                }
 
                 // Nếu người gọi nhận được DECLINE (do người nhận gửi)
                 if (remoteMessage.getData().get(Keys.KEY_CALL_RESPONSE).equals(CallResponse.DECLINE_INVITATION)) {
@@ -115,7 +127,7 @@ public class MessagingService extends FirebaseMessagingService {
 //                    if (IncomingCallActivity.incomingCallActivity != null) {
 //                        IncomingCallActivity.incomingCallActivity.finish();
 //                    }
-                    if (call.getRoom().getType().equals(RoomType.TWO)) { // Nếu phòng chỉ có 2 người
+                    if (call.getRoom().getType().equals(RoomType.CALL_TWO)) { // Nếu phòng chỉ có 2 người
                         sendBroadcast(new Intent(Receiver.CLOSE_OUTGOING_CALL_ACTIVITY));
                     } else { // Nếu phòng có nhiều người
                         Intent intent = new Intent(Receiver.JOIN_OUTGOING_CALL_ACTIVITY);
@@ -161,6 +173,10 @@ public class MessagingService extends FirebaseMessagingService {
 //            }
 
         } else if (notificationType.equals(NotificationType.FRIEND_REQUEST)) { // Nhận thông báo lời mời kết bạn
+            if (!preferenceManager.getBoolean(Keys.KEY_SETTING_DO_NOT_DISTURB)) {
+                handleFriendRequestMessage(remoteMessage);
+            }
+        } else if (notificationType.equals(NotificationType.FRIEND_ACCEPT)) { // Nhận thông báo đã chấp nhận lời mời kết bạn
             if (!preferenceManager.getBoolean(Keys.KEY_SETTING_DO_NOT_DISTURB)) {
                 handleFriendRequestMessage(remoteMessage);
             }
