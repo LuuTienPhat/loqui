@@ -12,6 +12,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.example.loqui.constants.Constants;
 import com.example.loqui.constants.MessageType;
 import com.example.loqui.constants.RecipientStatus;
+import com.example.loqui.constants.RoomStatus;
 import com.example.loqui.data.model.CallDetail;
 import com.example.loqui.data.model.User;
 import com.example.loqui.utils.FirebaseHelper;
@@ -180,6 +181,7 @@ public class JitsiActivity extends AppCompatActivity {
 
                         if (participants.size() == 1) {
                             sendMessage();
+                            stopCall();
                             stop();
                         }
                     }
@@ -308,7 +310,7 @@ public class JitsiActivity extends AppCompatActivity {
     }
 
     private void sendMessage() {
-        String messageContent = this.me.getFullName() + " started" + (call.getCallType().equals(MessageType.AUDIO_CALL) ? " an audio call" : " a video call");
+        String messageContent = this.me.getFullName() + " make" + (call.getCallType().equals(MessageType.AUDIO_CALL) ? " an audio call" : " a video call");
         HashMap<String, Object> message = new HashMap<>();
         String messageId = FirebaseHelper.generateId(database, Keys.KEY_COLLECTION_CHAT);
         message.put(Keys.KEY_ID, messageId);
@@ -322,5 +324,30 @@ public class JitsiActivity extends AppCompatActivity {
         message.put(Keys.KEY_MODIFIED_DATE, Utils.currentTimeMillis());
         database.collection(Keys.KEY_COLLECTION_CHAT).document(messageId).set(message);
 
+    }
+
+    private void stopCall() {
+        database.collection(Keys.KEY_COLLECTION_ROOM)
+                .document(call.getId())
+                .update(Keys.KEY_STATUS, RoomStatus.DELETED)
+                .addOnSuccessListener(unused -> {
+
+                    database.collection(Keys.KEY_COLLECTION_ROOM)
+                            .whereEqualTo(Keys.KEY_ROOM_ID, call.getId())
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
+                                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+                                        HashMap<String, Object> recipient = new HashMap<>();
+                                        recipient.put(Keys.KEY_STATUS, RecipientStatus.REMOVED);
+
+
+                                        DocumentReference documentReference = documentSnapshot.getReference();
+                                        documentReference.update(recipient);
+                                    }
+                                }
+                            });
+
+                });
     }
 }

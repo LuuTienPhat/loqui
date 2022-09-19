@@ -133,6 +133,8 @@ public class CustomStatusActivity extends AppCompatActivity implements StatusLis
             loading(false);
             if (statuses.isEmpty()) {
                 showErrorMessage();
+            } else {
+                binding.tvErrorMessage.setVisibility(View.GONE);
             }
         } else {
             loading(false);

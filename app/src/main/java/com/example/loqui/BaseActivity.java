@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.loqui.constants.UserAvailability;
 import com.example.loqui.data.model.ChatMessage;
+import com.example.loqui.utils.FirebaseHelper;
 import com.example.loqui.utils.Keys;
 import com.example.loqui.utils.MyToast;
 import com.example.loqui.utils.PreferenceManager;
@@ -31,6 +32,19 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         preferenceManager = new PreferenceManager(getApplicationContext());
         database = FirebaseFirestore.getInstance();
+
+//        FirebaseHelper.findUser(database, preferenceManager.getString(Keys.KEY_USER_ID))
+//                .addOnSuccessListener(queryDocumentSnapshots -> {
+//
+//                    if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
+//                        documentReference = queryDocumentSnapshots.getDocuments().get(0).getReference();
+//                    }
+//
+////                    documentReference = database.collection()
+////
+////                    documentReference = database.collection(Keys.KEY_COLLECTION_USERS)
+////                            .document(queryDocumentSnapshots.);
+//                });
 
         documentReference = database.collection(Keys.KEY_COLLECTION_USERS)
                 .document(preferenceManager.getString(Keys.KEY_DOCUMENT_REF));

@@ -96,7 +96,7 @@ public class PeopleFragment extends Fragment implements UserListener {
         database = FirebaseFirestore.getInstance();
         preferenceManager = new PreferenceManager(requireActivity().getApplicationContext());
         users = new ArrayList<>();
-        usersAdapter = new UsersAdapter(users, this);
+        usersAdapter = new UsersAdapter(users, this, preferenceManager, true);
         binding.rvUser.setAdapter(usersAdapter);
         myId = preferenceManager.getString(Keys.KEY_USER_ID);
 
@@ -174,7 +174,7 @@ public class PeopleFragment extends Fragment implements UserListener {
                                         });
 
                                 Tasks.whenAllComplete(t1).addOnSuccessListener(tasks -> {
-                                    usersAdapter = new UsersAdapter(users, this);
+                                    usersAdapter = new UsersAdapter(users, this, preferenceManager, true);
                                     binding.rvUser.setAdapter(usersAdapter);
 
                                     //usersAdapter.notifyItemRangeInserted(0, this.users.size());
@@ -239,7 +239,7 @@ public class PeopleFragment extends Fragment implements UserListener {
                                         });
 
                                 Tasks.whenAllComplete(t1).addOnSuccessListener(tasks -> {
-                                    usersAdapter = new UsersAdapter(users, this);
+                                    usersAdapter = new UsersAdapter(users, this, preferenceManager, true);
                                     binding.rvUser.setAdapter(usersAdapter);
 //                                    usersAdapter.notifyItemRangeRemoved(0, count);
                                     //usersAdapter.notifyItemRangeInserted(0, this.users.size());
@@ -340,7 +340,7 @@ public class PeopleFragment extends Fragment implements UserListener {
                         });
                 if (!users.isEmpty()) {
                     Tasks.whenAllComplete(t1).addOnSuccessListener(tasks -> {
-                        usersAdapter = new UsersAdapter(users, this);
+                        usersAdapter = new UsersAdapter(users, this, preferenceManager, true);
                         binding.rvUser.setAdapter(usersAdapter);
 //                usersAdapter.notifyItemRangeRemoved(0, count);
                         //usersAdapter.notifyItemRangeInserted(0, this.users.size());

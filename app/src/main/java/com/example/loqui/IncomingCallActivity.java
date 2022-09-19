@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -15,6 +16,7 @@ import com.example.loqui.constants.Constants;
 import com.example.loqui.constants.MessageType;
 import com.example.loqui.constants.NotificationType;
 import com.example.loqui.constants.Receiver;
+import com.example.loqui.constants.RoomType;
 import com.example.loqui.data.model.CallDetail;
 import com.example.loqui.data.model.Room;
 import com.example.loqui.data.model.User;
@@ -29,7 +31,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import org.jitsi.meet.sdk.BroadcastEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -49,21 +50,17 @@ public class IncomingCallActivity extends AppCompatActivity {
     private CallDetail call;
     private User me;
 
-    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            onBroadcastReceived(intent);
+            if (intent.getAction().equals(BROADCAST_OPEN_JITSI)) {
+                openJitsi();
+            }
+            if (intent.getAction().equals(Receiver.CLOSE_INCOMING_CALL_ACTIVITY)) {
+                finish();
+            }
         }
     };
-
-//    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            if (intent.getAction().equals(BROADCAST_OPEN_JITSI)) {
-//                openJitsi();
-//            }
-//        }
-//    };
 
     public static final String BROADCAST_OPEN_JITSI = "open_jitsi";
     public static final String BROADCAST_CLOSE_JITSI = "close_jitsi";
@@ -85,8 +82,6 @@ public class IncomingCallActivity extends AppCompatActivity {
             onBtnDeclinedClicked();
         });
 
-        registerForBroadcastMessages();
-
         //this.roomId = getIntent().getExtras().getString(Constants.ROOM);
 //        getRoom(this.roomId);
 
@@ -107,20 +102,26 @@ public class IncomingCallActivity extends AppCompatActivity {
             binding.ivCallType.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_round_videocam_24));
         }
 
-//        if (call.getRoom() != null) {
-//            database.collection(Keys.KEY_COLLECTION_ROOM)
-//                    .document(call.getRoom().getId())
-//                    .get()
-//                    .addOnSuccessListener(documentSnapshot -> {
-//                        Room room = new Room();
-//                        room.setId(documentSnapshot.getString(Keys.KEY_ID));
-//                        room.setName(documentSnapshot.getString(Keys.KEY_NAME));
-//                        room.setAvatar(documentSnapshot.getString(Keys.KEY_AVATAR));
-//                        call.setRoom(room);
-//
+        if (call.getRoom().getType().equals(RoomType.CALL_GROUP)) {
+            database.collection(Keys.KEY_COLLECTION_ROOM)
+                    .document(call.getRoom().getId())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        Room room = new Room();
+                        room.setId(documentSnapshot.getString(Keys.KEY_ID));
+                        room.setName(documentSnapshot.getString(Keys.KEY_NAME));
+                        room.setType(call.getRoom().getType());
+                        room.setStatus(documentSnapshot.getString(Keys.KEY_STATUS));
+                        room.setAvatar(documentSnapshot.getString(Keys.KEY_AVATAR));
+                        call.setRoom(room);
+
+                        String text = "(" + room.getName() + ")";
+                        binding.tvGroupName.setText(text);
+                        binding.tvGroupName.setVisibility(View.VISIBLE);
 //                        binding.tvName.setText(room.getName());
-//                        binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(room.getAvatar()));
-//                    });
+                        binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(room.getAvatar()));
+                    });
+        }
 //        } else {
         FirebaseHelper.findUser(database, call.getCaller().getId())
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -136,8 +137,10 @@ public class IncomingCallActivity extends AppCompatActivity {
 
                         call.setCaller(caller);
 
+                        if (!call.getRoom().getType().equals(RoomType.CALL_GROUP)) {
+                            binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(call.getCaller().getImage()));
+                        }
                         binding.tvName.setText(call.getCaller().getFullName());
-                        binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(call.getCaller().getImage()));
                     }
                 });
         //}
@@ -149,12 +152,53 @@ public class IncomingCallActivity extends AppCompatActivity {
         me.setImage(preferenceManager.getString(Keys.KEY_AVATAR));
         me.setToken(preferenceManager.getString(Keys.KEY_FCM_TOKEN));
 
+        sendSignalReceived();
+
 
 //        chatMessage = (ChatMessage) this.getIntent().getSerializableExtra("chat_message");
 //        query = database.collection(Keys.KEY_MESSAGE)
 //                .whereEqualTo(Keys.KEY_ROOM_ID, chatMessage.getRoomId());
 
 //        query.addSnapshotListener(eventListener);
+    }
+
+    private void sendSignalReceived() {
+        try {
+            JSONArray tokens = new JSONArray();
+            tokens.put(call.getCaller().getToken());
+
+            JSONObject data = new JSONObject();
+            data.put(Keys.KEY_NOTIFICATION_TYPE, NotificationType.CALL);
+            data.put(Constants.CALL_ID, call.getId());
+            data.put(Constants.CALL_TYPE, call.getCallType());
+            data.put(Keys.KEY_CREATED_DATE, Utils.currentTimeMillis());
+
+//            if (this.receivers.size() > 1) {
+//                data.put(Keys.KEY_ROOM_ID, room.getId());
+//            }
+
+            data.put(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID));
+
+            data.put(Keys.KEY_ROOM_ID, call.getRoom().getId());
+            data.put(Constants.ROOM_TYPE, call.getRoom().getType());
+
+            JSONObject caller = new JSONObject();
+            caller.put(Keys.KEY_ID, call.getCaller().getId());
+            caller.put(Keys.KEY_FCM_TOKEN, call.getCaller().getToken());
+            data.put(Constants.CALLER, caller);
+            data.put(Keys.KEY_CALL_RESPONSE, CallResponse.RECEIVED_INVITATION);
+
+            JSONObject body = new JSONObject();
+            body.put(Keys.REMOTE_MSG_DATA, data);
+            body.put(Keys.REMOTE_MSG_REGISTRATION_IDS, tokens);
+
+            MessagingService.sendNotification(getApplicationContext(), body.toString());
+
+//            openJitsi();
+
+        } catch (Exception ex) {
+            MyToast.showShortToast(this, ex.getMessage());
+        }
     }
 
     //    private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
@@ -192,6 +236,11 @@ public class IncomingCallActivity extends AppCompatActivity {
 //            if (this.receivers.size() > 1) {
 //                data.put(Keys.KEY_ROOM_ID, room.getId());
 //            }
+
+            data.put(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID));
+
+            data.put(Keys.KEY_ROOM_ID, call.getRoom().getId());
+            data.put(Constants.ROOM_TYPE, call.getRoom().getType());
 
             JSONObject caller = new JSONObject();
             caller.put(Keys.KEY_ID, call.getCaller().getId());
@@ -288,6 +337,9 @@ public class IncomingCallActivity extends AppCompatActivity {
 
             data.put(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID));
 
+            data.put(Keys.KEY_ROOM_ID, call.getRoom().getId());
+            data.put(Constants.ROOM_TYPE, call.getRoom().getType());
+
 //            if (this.receivers.size() > 1) {
 //                data.put(Keys.KEY_ROOM_ID, room.getId());
 //            }
@@ -371,59 +423,20 @@ public class IncomingCallActivity extends AppCompatActivity {
 //        }
 
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        IntentFilter intentFilter = new IntentFilter(BROADCAST_OPEN_JITSI);
-//        registerReceiver(broadcastReceiver, intentFilter);
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BROADCAST_OPEN_JITSI);
+        intentFilter.addAction(Receiver.CLOSE_INCOMING_CALL_ACTIVITY);
+        registerReceiver(broadcastReceiver, intentFilter);
+    }
 //
 //    @Override
 //    protected void onStop() {
 //        super.onStop();
 //        unregisterReceiver(broadcastReceiver);
 //    }
-
-    private void registerForBroadcastMessages() {
-        IntentFilter intentFilter = new IntentFilter();
-
-        /* This registers for every possible event sent from JitsiMeetSDK
-           If only some of the events are needed, the for loop can be replaced
-           with individual statements:
-           ex:  intentFilter.addAction(BroadcastEvent.Type.AUDIO_MUTED_CHANGED.getAction());
-                intentFilter.addAction(BroadcastEvent.Type.CONFERENCE_TERMINATED.getAction());
-                ... other events
-         */
-        for (BroadcastEvent.Type type : BroadcastEvent.Type.values()) {
-            intentFilter.addAction(type.getAction());
-        }
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
-    }
-
-    // Example for handling different JitsiMeetSDK events
-    private void onBroadcastReceived(Intent intent) {
-        if (intent != null) {
-            BroadcastEvent event = new BroadcastEvent(intent);
-
-//            switch (event.getType().getAction()) {
-//                case Receiver
-//                        .CLOSE_INCOMING_CALL_ACTIVITY:
-//
-//                    break;
-//                case Receiver.CLOSE_INCOMING_CALL_ACTIVITY:
-//                    //participantCount++;
-//                    Timber.i("Participant joined%s", event.getData().get("name"));
-//                    break;
-////                case CONFERENCE_TERMINATED:
-////                    break;
-//            }
-
-            if (event.getType().getAction().equals(Receiver.CLOSE_INCOMING_CALL_ACTIVITY)) {
-                finish();
-            }
-        }
-    }
 
     @Override
     protected void onDestroy() {

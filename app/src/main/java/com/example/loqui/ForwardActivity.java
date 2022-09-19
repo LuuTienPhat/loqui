@@ -258,6 +258,7 @@ public class ForwardActivity extends BaseActivity implements UsersForwardAdapter
                         newRoom.put(Keys.KEY_ID, roomId);
                         newRoom.put(Keys.KEY_NAME, "");
                         newRoom.put(Keys.KEY_AVATAR, "");
+                        newRoom.put(Keys.KEY_TYPE, RoomType.TWO);
                         newRoom.put(Keys.KEY_STATUS, RoomStatus.NEW);
                         newRoom.put(Keys.KEY_CREATED_DATE, Utils.currentTimeMillis());
                         newRoom.put(Keys.KEY_MODIFIED_DATE, Utils.currentTimeMillis());

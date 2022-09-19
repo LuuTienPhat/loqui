@@ -15,6 +15,7 @@ import com.example.loqui.constants.NotificationType;
 import com.example.loqui.constants.Receiver;
 import com.example.loqui.constants.RecipientStatus;
 import com.example.loqui.constants.RoomStatus;
+import com.example.loqui.constants.RoomType;
 import com.example.loqui.data.model.CallDetail;
 import com.example.loqui.data.model.Room;
 import com.example.loqui.data.model.User;
@@ -68,6 +69,10 @@ public class OutgoingCallActivity extends BaseActivity {
                 sendMessage();
                 finish();
             }
+            if (Receiver.RECEIVE_OUTGOING_CALL_ACTIVITY.equals(intent.getAction())) {
+                String friendId = intent.getStringExtra(Keys.KEY_USER_ID);
+                receivedSignal(friendId);
+            }
             if (Receiver.JOIN_OUTGOING_CALL_ACTIVITY.equals(intent.getAction())) {
                 String friendId = intent.getStringExtra(Keys.KEY_USER_ID);
                 cancelCall(friendId);
@@ -117,13 +122,25 @@ public class OutgoingCallActivity extends BaseActivity {
             binding.ivCallType.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_round_videocam_24));
         }
 
-        if (receivers.size() == 1) {
+        if (this.room.getType().equals(RoomType.TWO)) {
+            this.room.setType(RoomType.CALL_TWO);
             binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(receivers.get(0).getImage()));
             binding.tvName.setText(receivers.get(0).getFullName());
-        } else {
+
+
+        } else if (this.room.getType().equals(RoomType.GROUP)) {
+            this.room.setType(RoomType.CALL_GROUP);
             binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(room.getAvatar()));
             binding.tvName.setText(room.getName());
         }
+
+//        if (receivers.size() == 1) {
+//            binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(receivers.get(0).getImage()));
+//            binding.tvName.setText(receivers.get(0).getFullName());
+//        } else {
+//            binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(room.getAvatar()));
+//            binding.tvName.setText(room.getName());
+//        }
 
         this.me = new User();
         this.me.setId(preferenceManager.getString(Keys.KEY_USER_ID));
@@ -243,37 +260,78 @@ public class OutgoingCallActivity extends BaseActivity {
 //                                                List<String> acceptedUsers = new ArrayList<>();
 //                                                List<String> declinedUsers = new ArrayList<>();
                                                 if (!queryDocumentSnapshots1.getDocuments().isEmpty()) {
-                                                    Integer usersNumber = 0;
-                                                    Integer declinedUser = 0;
+                                                    int usersNumber = 0;
+                                                    int declinedUser = 0;
+                                                    int receivedUser = 0;
+                                                    int acceptedUser = 0;
                                                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots1.getDocuments()) {
                                                         usersNumber += 1;
 
 //                                                        if (documentSnapshot.get(Keys.KEY_STATUS).equals(RecipientStatus.NEW)) {
 //                                                            newUsers.add(documentSnapshot.getString(Keys.KEY_USER_ID));
 //                                                        }
-//                                                        if (documentSnapshot.get(Keys.KEY_STATUS).equals(RecipientStatus.ACCEPT)) {
-//                                                            newUsers.add(documentSnapshot.getString(Keys.KEY_USER_ID));
-//                                                        }
+                                                        if (documentSnapshot.get(Keys.KEY_STATUS).equals(RecipientStatus.ACCEPT)) {
+                                                            //newUsers.add(documentSnapshot.getString(Keys.KEY_USER_ID));
+                                                            acceptedUser += 1;
+                                                        }
+                                                        if (documentSnapshot.get(Keys.KEY_STATUS).equals(RecipientStatus.RECEIVED)) {
+                                                            //newUsers.add(documentSnapshot.getString(Keys.KEY_USER_ID));
+                                                            receivedUser += 1;
+                                                        }
                                                         if (documentSnapshot.get(Keys.KEY_STATUS).equals(RecipientStatus.REMOVED)) {
                                                             //newUsers.add(documentSnapshot.getString(Keys.KEY_USER_ID));
                                                             declinedUser += 1;
                                                         }
                                                     }
 
-                                                    if ((usersNumber - declinedUser) > 1) {
-                                                        //
-                                                        openJitsi();
+                                                    if (acceptedUser >= 2) {
+
                                                     } else {
-                                                        // Hủy cuộc gọi
-                                                        sendMessage();
-                                                        finish();
-                                                        //sendBroadcast(new Intent(Receiver.CLOSE_OUTGOING_CALL_ACTIVITY));
+                                                        if (receivedUser == 1) {
+                                                            sendMessage();
+                                                            stopCall();
+                                                            finish();
+                                                        }
                                                     }
+
+//                                                    if ((usersNumber - declinedUser) > 1) {
+//                                                        //
+//                                                        openJitsi();
+//                                                    } else {
+//                                                        // Hủy cuộc gọi
+//                                                        sendMessage();
+//                                                        finish();
+//                                                        //sendBroadcast(new Intent(Receiver.CLOSE_OUTGOING_CALL_ACTIVITY));
+//                                                    }
                                                 }
                                             });
                                 });
                     }
                 });
+    }
+
+    private void stopCall() {
+        database.collection(Keys.KEY_COLLECTION_ROOM)
+                .document(callId)
+                .update(Keys.KEY_STATUS, RoomStatus.DELETED)
+                .addOnSuccessListener(unused -> {
+                    database.collection(Keys.KEY_COLLECTION_ROOM)
+                            .whereEqualTo(Keys.KEY_ROOM_ID, call.getId())
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
+                                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+                                        HashMap<String, Object> recipient = new HashMap<>();
+                                        recipient.put(Keys.KEY_STATUS, RecipientStatus.REMOVED);
+
+                                        DocumentReference documentReference = documentSnapshot.getReference();
+                                        documentReference.update(recipient);
+                                    }
+                                }
+                            });
+                });
+
+
     }
 
     private void openJitsi() {
@@ -440,20 +498,20 @@ public class OutgoingCallActivity extends BaseActivity {
 //        }
 //    }
 
-    private void sendMessage() {
-        String messageContent = this.me.getFullName() + " started" + (call.getCallType().equals(MessageType.AUDIO_CALL) ? " an audio call" : " a video call");
-        HashMap<String, Object> message = new HashMap<>();
-        String messageId = FirebaseHelper.generateId(database, Keys.KEY_COLLECTION_CHAT);
-        message.put(Keys.KEY_ID, messageId);
-        message.put(Keys.KEY_ROOM_ID, call.getId());
-        message.put(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID));
-        message.put(Keys.KEY_MESSAGE, messageContent);
-        message.put(Keys.KEY_REPLY_ID, "");
-        message.put(Keys.KEY_STATUS, "");
-        message.put(Keys.KEY_TYPE, call.getCallType().equals(MessageType.AUDIO_CALL) ? MessageType.AUDIO_CALL : MessageType.VIDEO_CALL);
-        message.put(Keys.KEY_CREATED_DATE, Utils.currentTimeMillis());
-        message.put(Keys.KEY_MODIFIED_DATE, Utils.currentTimeMillis());
-        database.collection(Keys.KEY_COLLECTION_CHAT).document(messageId).set(message);
+    private void receivedSignal(String userId) {
+        HashMap<String, Object> recipient = new HashMap<>();
+        recipient.put(Keys.KEY_STATUS, RecipientStatus.RECEIVED);
+        //recipient.put(Keys.KEY_STATUS, receiver.getId().equals(preferenceManager.getString(Keys.KEY_USER_ID)) ? RecipientStatus.ACCEPT : RecipientStatus.NONE);
+        database.collection(Keys.KEY_COLLECTION_RECIPIENT)
+                .whereEqualTo(Keys.KEY_ROOM_ID, callId)
+                .whereEqualTo(Keys.KEY_USER_ID, userId)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
+                        DocumentReference documentReference = queryDocumentSnapshots.getDocuments().get(0).getReference();
+                        documentReference.update(recipient);
+                    }
+                });
 
     }
 
@@ -474,11 +532,16 @@ public class OutgoingCallActivity extends BaseActivity {
             caller.put(Keys.KEY_FCM_TOKEN, me.getToken());
             data.put(Constants.CALLER, caller);
 
+            data.put(Keys.KEY_ROOM_ID, room.getId());
+            data.put(Constants.ROOM_TYPE, room.getType());
+
             JSONObject body = new JSONObject();
             body.put(Keys.REMOTE_MSG_DATA, data);
             body.put(Keys.REMOTE_MSG_REGISTRATION_IDS, tokens);
 
             MessagingService.sendNotification(getApplicationContext(), body.toString());
+
+            sendMessage();
 
             finish();
 
@@ -524,6 +587,23 @@ public class OutgoingCallActivity extends BaseActivity {
 //                    MyToast.showShortToast(this.getApplicationContext(), e.getMessage());
 //                    Timber.e(e);
 //                });
+    }
+
+    private void sendMessage() {
+        String messageContent = this.me.getFullName() + " make" + (call.getCallType().equals(MessageType.AUDIO_CALL) ? " an audio call" : " a video call");
+        HashMap<String, Object> message = new HashMap<>();
+        String messageId = FirebaseHelper.generateId(database, Keys.KEY_COLLECTION_CHAT);
+        message.put(Keys.KEY_ID, messageId);
+        message.put(Keys.KEY_ROOM_ID, room.getId());
+        message.put(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID));
+        message.put(Keys.KEY_MESSAGE, messageContent);
+        message.put(Keys.KEY_REPLY_ID, "");
+        message.put(Keys.KEY_STATUS, "");
+        message.put(Keys.KEY_TYPE, call.getCallType().equals(MessageType.AUDIO_CALL) ? MessageType.AUDIO_CALL : MessageType.VIDEO_CALL);
+        message.put(Keys.KEY_CREATED_DATE, Utils.currentTimeMillis());
+        message.put(Keys.KEY_MODIFIED_DATE, Utils.currentTimeMillis());
+        database.collection(Keys.KEY_COLLECTION_CHAT).document(messageId).set(message);
+
     }
 
     @Override

@@ -210,6 +210,7 @@ public class RenameGroupActivity extends BaseActivity implements UsersAvatarAdap
         if (result == UsersAvatarAdapter.Result.CLICKED) {
             Intent intent = new Intent(this.getApplicationContext(), AccountInformationActivity.class);
             intent.putExtra(Constants.USER, user);
+            intent.putExtra(Constants.OPEN_FROM_NOTIFICATION, true);
             startActivity(intent);
 
 

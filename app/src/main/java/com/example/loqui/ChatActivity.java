@@ -358,7 +358,12 @@ public class ChatActivity extends BaseActivity implements ExtraChatDialog.Listen
         });
         binding.btnBack.setOnClickListener(view -> onBackPressed());
         binding.layoutSend.setOnClickListener(view -> {
-            sendMessageNew(MessageType.MESSAGE, binding.inputMessage.getText().toString(), null);
+            if (binding.inputMessage.getText().toString().trim().isEmpty()) {
+                MyToast.showShortToast(this, "Please type message");
+            } else {
+                sendMessageNew(MessageType.MESSAGE, binding.inputMessage.getText().toString(), null);
+            }
+
         });
         binding.btnCall.setOnClickListener(v -> {
             handleOnBtnCallClicked();
@@ -863,7 +868,7 @@ public class ChatActivity extends BaseActivity implements ExtraChatDialog.Listen
 //                                attachment.setPath(uri.toString());
 //                                attachment.setCreatedDate(Utils.currentTimeMillis());
 
-                                if (extension.equals(ImageExtension.JPG) | extension.equals(ImageExtension.PNG)) {
+                                if (extension.equals(ImageExtension.JPG) || extension.equals(ImageExtension.PNG)) {
                                     attachment.put(Keys.KEY_EXTENSION, ImageExtension.JPG);
 //                                    attachment.setExtension(ImageExtension.JPG);
                                     sendMessageNew(MessageType.MEDIA, "send an image", imageId);
@@ -1210,6 +1215,9 @@ public class ChatActivity extends BaseActivity implements ExtraChatDialog.Listen
 
     @Override
     public void onBackPressed() {
+//        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        startActivity(intent);
         if (this.getIntent().getBooleanExtra(Constants.OPEN_FROM_NOTIFICATION, false)) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

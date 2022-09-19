@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -75,16 +76,19 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
     private FirebaseFirestore database;
     private List<ChatMessage> chatMessages;
     private List<String> rooms;
+    //private Set<Room> rooms2 = new HashSet<>();
+    private HashMap<String, ChatMessage> roomChatMessages = new HashMap<>();
+    private ListenerRegistration listenerRegistrationRecipient = null;
 //    private List<Object> objects;
 //    private UsersForwardAdapter usersForwardAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
     }
 
     @Override
@@ -99,8 +103,19 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
         init();
 //        getMyRooms();
 
+        listenerRegistrationRecipient = database.collection(Keys.KEY_COLLECTION_RECIPIENT)
+                .whereEqualTo(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID))
+                .addSnapshotListener(recipientListener);
+
+
+//        binding.lySwipe.setOnRefreshListener(() -> {
+//            getMyRooms();
+//            binding.lySwipe.setRefreshing(false);
+//        });
+
+
         binding.lySwipe.setOnRefreshListener(() -> {
-            getMyRooms();
+            refresh();
             binding.lySwipe.setRefreshing(false);
         });
 
@@ -137,16 +152,139 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
 //        getRequestedMessages();
     }
 
+//    private void listenConversations() {
+//        if (!this.rooms.isEmpty()) {
+//            database.collection(Keys.KEY_COLLECTION_CHAT)
+//                    .whereIn(Keys.KEY_ROOM_ID, this.rooms)
+//                    .orderBy(Keys.KEY_CREATED_DATE, Query.Direction.DESCENDING)
+//                    .addSnapshotListener(eventListener);
+//        } else {
+//            loading(false);
+//        }
+//
+//    }
+
+    private List<ListenerRegistration> listenerRegistrations = new ArrayList<>();
+
     private void listenConversations() {
-        if (!this.rooms.isEmpty()) {
+        if (!rooms.isEmpty()) {
             database.collection(Keys.KEY_COLLECTION_CHAT)
                     .whereIn(Keys.KEY_ROOM_ID, this.rooms)
                     .orderBy(Keys.KEY_CREATED_DATE, Query.Direction.DESCENDING)
-                    .addSnapshotListener(eventListener);
+                    .addSnapshotListener(eventListener2);
         } else {
             loading(false);
         }
 
+    }
+
+    private void listenConversations2() {
+        if (!rooms.isEmpty()) {
+
+            List<List<String>> subList = new ArrayList<>();
+            for (int i = 0; i < rooms.size(); i += 10) {
+                subList.add(rooms.subList(i, Math.min(i + 10, rooms.size())));
+            }
+
+            for (List<String> strings : subList) {
+                ListenerRegistration listenerRegistration = database.collection(Keys.KEY_COLLECTION_CHAT)
+                        .whereIn(Keys.KEY_ROOM_ID, strings)
+                        .orderBy(Keys.KEY_CREATED_DATE, Query.Direction.DESCENDING)
+                        .addSnapshotListener(eventListener2);
+
+                listenerRegistrations.add(listenerRegistration);
+            }
+
+
+        } else {
+            loading(false);
+        }
+
+    }
+
+    private final EventListener<QuerySnapshot> eventListener2 = (value, error) -> {
+        if (error != null) {
+            return;
+        }
+        if (value != null) {
+            int count = chatMessages.size();
+//            this.chatMessages.clear();
+//            conversationAdapter.notifyDataSetChanged();
+
+            //roomChatMessages = new HashMap<>();
+
+            for (DocumentChange documentChange : value.getDocumentChanges()) {
+                QueryDocumentSnapshot queryDocumentSnapshot = documentChange.getDocument();
+
+                String roomId = queryDocumentSnapshot.getString(Keys.KEY_ROOM_ID);
+
+                ChatMessage chatMessage = new ChatMessage();
+                chatMessage.setId(queryDocumentSnapshot.getString(Keys.KEY_ID));
+                chatMessage.setUserId(queryDocumentSnapshot.getString(Keys.KEY_USER_ID));
+                chatMessage.setRoomId(roomId);
+                chatMessage.setMessage(queryDocumentSnapshot.getString(Keys.KEY_MESSAGE));
+                chatMessage.setReplyId(queryDocumentSnapshot.getString(Keys.KEY_REPLY_ID));
+                chatMessage.setStatus(queryDocumentSnapshot.getString(Keys.KEY_STATUS));
+                chatMessage.setType(queryDocumentSnapshot.getString(Keys.KEY_TYPE));
+                chatMessage.setCreatedDate(queryDocumentSnapshot.getString(Keys.KEY_CREATED_DATE));
+                chatMessage.setModifiedDate(queryDocumentSnapshot.getString(Keys.KEY_MODIFIED_DATE));
+
+
+                if (!roomChatMessages.containsKey(roomId)) {
+                    roomChatMessages.put(roomId, chatMessage);
+
+                    chatMessages.add(chatMessage);
+                    conversationAdapter.notifyItemInserted(chatMessages.size() - 1);
+                } else {
+                    int i = isGreaterThan(chatMessage);
+                    if (i != -1) {
+                        chatMessages.set(i, chatMessage);
+                        conversationAdapter.notifyItemChanged(i);
+                    }
+                }
+
+            }
+
+            //chatMessages = new ArrayList<>(roomChatMessages.values());
+//            conversationAdapter = new ConversationAdapter(this, chatMessages);
+//            binding.conversationRecyclerView.setAdapter(conversationAdapter);
+//            conversationAdapter.notifyDataSetChanged();
+//            conversationAdapter.notifyItemRangeRemoved(0, count);
+//            conversationAdapter.notifyItemRangeRemoved(0, count);
+//            conversationAdapter.notifyItemRangeInserted(0, chatMessages.size());
+        }
+        loading(false);
+    };
+
+    private int findChatMessages(String roomId) {
+        for (int i = 0; i < this.chatMessages.size(); i++) {
+            if (this.chatMessages.get(i).getRoomId().equals(roomId)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int findChatMessages2(String roomId, String messageId) {
+        for (int i = 0; i < this.chatMessages.size(); i++) {
+            if (this.chatMessages.get(i).getRoomId().equals(roomId)) {
+                if (this.chatMessages.get(i).getId().equals(messageId)) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private int isGreaterThan(ChatMessage chatMessage) {
+        for (int i = 0; i < this.chatMessages.size(); i++) {
+            if (this.chatMessages.get(i).getRoomId().equals(chatMessage.getRoomId())) {
+                if (Long.parseLong(chatMessage.getCreatedDate()) > Long.parseLong(this.chatMessages.get(i).getCreatedDate())) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
@@ -201,6 +339,49 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
         }
     }
 
+    private final EventListener<QuerySnapshot> recipientListener = (value, error) -> {
+//        loading(true);
+        if (error != null) {
+//            loading(false);
+            return;
+        }
+        if (value != null) {
+//            int count = chatMessages.size();
+//            chatMessages.clear();
+            //Set<String> filter = new HashSet<>();
+
+            for (DocumentChange documentChange : value.getDocumentChanges()) {
+                QueryDocumentSnapshot queryDocumentSnapshot = documentChange.getDocument();
+
+                if (queryDocumentSnapshot.getString(Keys.KEY_STATUS).equals(RecipientStatus.DECLINE) || queryDocumentSnapshot.getString(Keys.KEY_STATUS).equals(RecipientStatus.ACCEPT)) {
+                    continue;
+                } else {
+                    if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                        if (!queryDocumentSnapshot.getString(Keys.KEY_STATUS).equals(RecipientStatus.REMOVED)) {
+                            rooms.add(queryDocumentSnapshot.getString(Keys.KEY_ROOM_ID));
+                        }
+                    }
+
+                    if (documentChange.getType() == DocumentChange.Type.MODIFIED) {
+                        if (queryDocumentSnapshot.getString(Keys.KEY_STATUS).equals(RecipientStatus.REMOVED)) {
+                            rooms.remove(queryDocumentSnapshot.getString(Keys.KEY_ROOM_ID));
+                        }
+
+                        if (!queryDocumentSnapshot.getString(Keys.KEY_STATUS).equals(RecipientStatus.REMOVED)) {
+                            rooms.add(queryDocumentSnapshot.getString(Keys.KEY_ROOM_ID));
+                        }
+                    }
+                }
+            }
+
+            for (ListenerRegistration l : listenerRegistrations) {
+                l.remove();
+            }
+
+            listenConversations2();
+        }
+    };
+
     private void getMyRooms() {
         loading(true);
 
@@ -236,7 +417,7 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
                             subList.add(rooms.subList(i, Math.min(i + 10, rooms.size())));
                         }
 
-                        subList.forEach(strings -> {
+                        for (List<String> strings : subList) {
                             Task<QuerySnapshot> t2 = database.collection(Keys.KEY_COLLECTION_ROOM)
                                     .whereIn(Keys.KEY_ID, strings)
                                     .get()
@@ -245,13 +426,13 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
                                             //List<String> hiddenRoom = new ArrayList<>();
                                             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots1.getDocuments()) {
                                                 String roomStatus = documentSnapshot.getString(Keys.KEY_STATUS);
-                                                if (roomStatus.equals(RoomStatus.DELETED) | roomStatus.equals(RoomStatus.REQUESTED) | roomStatus.equals(RoomStatus.ARCHIVED)) {
+                                                if (roomStatus.equals(RoomStatus.DELETED) || roomStatus.equals(RoomStatus.REQUESTED) || roomStatus.equals(RoomStatus.ARCHIVED)) {
                                                     //hiddenRoom.add(documentSnapshot.getString(Keys.KEY_ID));
                                                     this.rooms.remove(documentSnapshot.getString(Keys.KEY_ID));
                                                 }
                                             }
 
-                                            listenConversations();
+
 //                                        database.collection(Keys.KEY_COLLECTION_CHAT)
 //                                                .whereIn(Keys.KEY_ROOM_ID, this.rooms)
 //                                                .orderBy(Keys.KEY_CREATED_DATE, Query.Direction.DESCENDING)
@@ -293,8 +474,11 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
                                             loading(false);
                                         }
                                     });
-                        });
-
+                            Tasks.whenAllComplete(t2)
+                                    .addOnSuccessListener(tasks -> {
+                                        listenConversations();
+                                    });
+                        }
 
                     } else {
                         loading(false);
@@ -304,6 +488,130 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
                     loading(false);
                 });
     }
+
+    private void refresh() {
+        listenerRegistrationRecipient.remove();
+        //this.rooms2.clear();
+        this.rooms.clear();
+        this.roomChatMessages.clear();
+        this.chatMessages.clear();
+
+        for (ListenerRegistration l : listenerRegistrations) {
+            l.remove();
+        }
+
+        listenerRegistrationRecipient = database.collection(Keys.KEY_COLLECTION_RECIPIENT)
+                .whereEqualTo(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID))
+                .addSnapshotListener(recipientListener);
+
+    }
+
+//    private void getMyRooms() {
+//        loading(true);
+//
+//        Set<String> filter = new HashSet<>();
+//        Task<QuerySnapshot> t1 = database.collection(Keys.KEY_COLLECTION_RECIPIENT)
+//                .whereEqualTo(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID))
+//                .get()
+//                .addOnSuccessListener(queryDocumentSnapshots -> {
+//                    if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
+//                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+//                            if (!documentSnapshot.getString(Keys.KEY_STATUS).equals(RecipientStatus.REMOVED)) {
+//                                filter.add(documentSnapshot.getString(Keys.KEY_ROOM_ID));
+//                            }
+//
+//                        }
+//
+//                        this.rooms = new ArrayList<>(filter);
+//
+//                    } else {
+//                        loading(false);
+//                    }
+//                }).addOnFailureListener(e -> {
+//                    loading(false);
+//                });
+//
+//
+//        Tasks.whenAllSuccess(t1)
+//                .addOnSuccessListener(objects -> {
+//                    if (!this.rooms.isEmpty()) {
+//
+//                        List<List<String>> subList = new ArrayList<>();
+//                        for (int i = 0; i < rooms.size(); i += 10) {
+//                            subList.add(rooms.subList(i, Math.min(i + 10, rooms.size())));
+//                        }
+//
+//                        for (List<String> strings : subList) {
+//                            Task<QuerySnapshot> t2 = database.collection(Keys.KEY_COLLECTION_ROOM)
+//                                    .whereIn(Keys.KEY_ID, strings)
+//                                    .get()
+//                                    .addOnSuccessListener(queryDocumentSnapshots1 -> {
+//                                        if (!queryDocumentSnapshots1.getDocuments().isEmpty()) {
+//                                            //List<String> hiddenRoom = new ArrayList<>();
+//                                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots1.getDocuments()) {
+//                                                String roomStatus = documentSnapshot.getString(Keys.KEY_STATUS);
+//                                                if (roomStatus.equals(RoomStatus.DELETED) | roomStatus.equals(RoomStatus.REQUESTED) | roomStatus.equals(RoomStatus.ARCHIVED)) {
+//                                                    //hiddenRoom.add(documentSnapshot.getString(Keys.KEY_ID));
+//                                                    this.rooms.remove(documentSnapshot.getString(Keys.KEY_ID));
+//                                                }
+//                                            }
+//
+//
+////                                        database.collection(Keys.KEY_COLLECTION_CHAT)
+////                                                .whereIn(Keys.KEY_ROOM_ID, this.rooms)
+////                                                .orderBy(Keys.KEY_CREATED_DATE, Query.Direction.DESCENDING)
+////                                                .get()
+////                                                .addOnSuccessListener(queryDocumentSnapshots2 -> {
+////                                                    Set<String> filter1 = new HashSet<>();
+////                                                    int count = chatMessages.size();
+////                                                    chatMessages.clear();
+////                                                    conversationAdapter.notifyItemRangeRemoved(0, count);
+////
+////                                                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots2.getDocuments()) {
+////
+////                                                        String roomId = documentSnapshot.getString(Keys.KEY_ROOM_ID);
+////
+////                                                        if (!filter1.contains(roomId)) {
+////                                                            ChatMessage chatMessage = new ChatMessage();
+////                                                            chatMessage.setId(documentSnapshot.getString(Keys.KEY_ID));
+////                                                            chatMessage.setUserId(documentSnapshot.getString(Keys.KEY_USER_ID));
+////                                                            chatMessage.setRoomId(roomId);
+////                                                            chatMessage.setMessage(documentSnapshot.getString(Keys.KEY_MESSAGE));
+////                                                            chatMessage.setReplyId(documentSnapshot.getString(Keys.KEY_REPLY_ID));
+////                                                            chatMessage.setStatus(documentSnapshot.getString(Keys.KEY_STATUS));
+////                                                            chatMessage.setType(documentSnapshot.getString(Keys.KEY_TYPE));
+////                                                            chatMessage.setCreatedDate(documentSnapshot.getString(Keys.KEY_CREATED_DATE));
+////                                                            chatMessage.setModifiedDate(documentSnapshot.getString(Keys.KEY_MODIFIED_DATE));
+////                                                            chatMessages.add(chatMessage);
+////
+////                                                            filter1.add(roomId);
+////                                                        }
+////
+////                                                    }
+////
+////                                                    conversationAdapter = new ConversationAdapter(this, chatMessages);
+////                                                    binding.conversationRecyclerView.setAdapter(conversationAdapter);
+////                                                    loading(false);
+////                                                });
+//
+//                                        } else {
+//                                            loading(false);
+//                                        }
+//                                    });
+//                            Tasks.whenAllComplete(t2)
+//                                    .addOnSuccessListener(tasks -> {
+//                                        listenConversations(strings);
+//                                    });
+//                        }
+//
+//                    } else {
+//                        loading(false);
+//                    }
+//
+//                }).addOnFailureListener(e -> {
+//                    loading(false);
+//                });
+//    }
 
     private int findChatMessage(String chatMessageId) {
         int index = -1;
@@ -321,7 +629,7 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
 //        chatMessages = new ArrayList<>();
 //        getMyRooms();
         super.onResume();
-        getMyRooms();
+        //getMyRooms();
 //        loadingUserDetails();
     }
 
@@ -383,7 +691,7 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
                                         List<String> hiddenRoom = new ArrayList<>();
                                         for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots1.getDocuments()) {
                                             String roomStatus = documentSnapshot.getString(Keys.KEY_STATUS);
-                                            if (!roomStatus.equals(RoomStatus.DELETED) | !roomStatus.equals(RoomStatus.REQUESTED) | !roomStatus.equals(RoomStatus.ARCHIVED)) {
+                                            if (!roomStatus.equals(RoomStatus.DELETED) || !roomStatus.equals(RoomStatus.REQUESTED) || !roomStatus.equals(RoomStatus.ARCHIVED)) {
                                                 hiddenRoom.add(documentSnapshot.getString(Keys.KEY_ID));
                                             }
                                         }
@@ -465,13 +773,13 @@ public class ChatFragment extends Fragment implements ConversationAdapter.Listen
                                             //List<String> hiddenRoom = new ArrayList<>();
                                             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots1.getDocuments()) {
                                                 String roomStatus = documentSnapshot.getString(Keys.KEY_STATUS);
-                                                if (roomStatus.equals(RoomStatus.DELETED) | roomStatus.equals(RoomStatus.REQUESTED) | roomStatus.equals(RoomStatus.ARCHIVED)) {
+                                                if (roomStatus.equals(RoomStatus.DELETED) || roomStatus.equals(RoomStatus.REQUESTED) | roomStatus.equals(RoomStatus.ARCHIVED)) {
                                                     //hiddenRoom.add(documentSnapshot.getString(Keys.KEY_ID));
                                                     this.rooms.remove(documentSnapshot.getString(Keys.KEY_ID));
                                                 }
                                             }
 
-                                            listenConversations();
+                                            //listenConversations();
 
                                         } else {
                                             loading(false);

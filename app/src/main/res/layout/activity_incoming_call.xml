@@ -35,6 +35,15 @@
             android:textColor="@color/cultured"
             android:textSize="@dimen/_18sdp" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvGroupName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/cultured"
+            android:textSize="@dimen/_14sdp"
+            android:visibility="gone" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <View

@@ -109,6 +109,23 @@ public class AccountInformationActivity extends BaseActivity implements CustomDi
                         for (DocumentChange documentChange : value.getDocumentChanges()) {
                             QueryDocumentSnapshot queryDocumentSnapshot = documentChange.getDocument();
 
+                            if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                                String statusType = queryDocumentSnapshot.getString(Keys.KEY_STATUS);
+                                if (statusType.equals(StatusStatus.ACTIVE)) {
+                                    Status status = new Status();
+                                    status.setId(queryDocumentSnapshot.getString(Keys.KEY_ID));
+                                    status.setUserId(queryDocumentSnapshot.getString(Keys.KEY_USER_ID));
+                                    status.setName(queryDocumentSnapshot.getString(Keys.KEY_NAME));
+                                    status.setIcon(queryDocumentSnapshot.getString(Keys.KEY_ICON));
+                                    status.setHour(queryDocumentSnapshot.getString(Keys.KEY_HOUR));
+                                    status.setEndDate(queryDocumentSnapshot.getString(Keys.KEY_END_DATE));
+
+                                    binding.lyStatus.setVisibility(View.VISIBLE);
+                                    binding.tvStatusIcon.setText(status.getIcon());
+                                    binding.tvStatusName.setText(status.getName());
+                                }
+                            }
+
                             if (documentChange.getType() == DocumentChange.Type.MODIFIED) {
                                 String statusType = queryDocumentSnapshot.getString(Keys.KEY_STATUS);
                                 if (statusType.equals(StatusStatus.ACTIVE)) {
@@ -175,6 +192,8 @@ public class AccountInformationActivity extends BaseActivity implements CustomDi
                                 newFriend.put(Keys.KEY_STATUS, FriendStatus.FRIEND);
                                 newFriend.put(Keys.KEY_MODIFIED_DATE, Utils.currentTimeMillis());
                                 documentSnapshot.getReference().update(newFriend); //set status of friend to fiend
+
+                                sendAcceptedNotification();
 
                                 query.get().addOnSuccessListener(queryDocumentSnapshots1 -> {
                                     queryDocumentSnapshots1.getDocuments().get(0).getReference().update(newFriend); //set status of me to friend
@@ -601,6 +620,32 @@ public class AccountInformationActivity extends BaseActivity implements CustomDi
 //            data.put(Keys.KEY_ROOM_ID, roomId);
 
             data.put(Keys.KEY_NOTIFICATION_TYPE, NotificationType.FRIEND_REQUEST);
+
+            JSONObject body = new JSONObject();
+            body.put(Keys.REMOTE_MSG_DATA, data);
+            body.put(Keys.REMOTE_MSG_REGISTRATION_IDS, tokens);
+
+            MessagingService.sendNotification(this.getApplicationContext(), body.toString());
+
+        } catch (Exception ex) {
+            MyToast.showShortToast(this, ex.getMessage());
+        }
+    }
+
+    private void sendAcceptedNotification() {
+        try {
+            JSONArray tokens = new JSONArray();
+            tokens.put(selectedUser.getToken());
+
+            JSONObject data = new JSONObject();
+            data.put(Keys.KEY_USER_ID, preferenceManager.getString(Keys.KEY_USER_ID));
+            data.put(Keys.KEY_FIRSTNAME, preferenceManager.getString(Keys.KEY_FIRSTNAME));
+            data.put(Keys.KEY_LASTNAME, preferenceManager.getString(Keys.KEY_LASTNAME));
+            data.put(Keys.KEY_FCM_TOKEN, preferenceManager.getString(Keys.KEY_FCM_TOKEN));
+            data.put(Keys.KEY_MESSAGE, me.getFullName() + " accepted your request! You two are friends now");
+//            data.put(Keys.KEY_ROOM_ID, roomId);
+
+            data.put(Keys.KEY_NOTIFICATION_TYPE, NotificationType.FRIEND_ACCEPT);
 
             JSONObject body = new JSONObject();
             body.put(Keys.REMOTE_MSG_DATA, data);

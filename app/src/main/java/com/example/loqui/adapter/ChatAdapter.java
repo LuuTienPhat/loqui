@@ -221,8 +221,16 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                                     binding.tvReplyMessage.setText(message);
                                 }
 
-                                if (documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.MEDIA) | documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.FILE)) {
+                                if (documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.MEDIA) || documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.FILE)) {
                                     binding.tvReplyMessage.setText("@ Attachment");
+                                }
+
+                                if (documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.AUDIO_CALL)) {
+                                    binding.tvReplyMessage.setText("\uD83D\uDCDE Audio Call");
+                                }
+
+                                if (documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.VIDEO_CALL)) {
+                                    binding.tvReplyMessage.setText("\uD83D\uDCF9 Video Call");
                                 }
 
                                 binding.tvReplyMessage.setVisibility(View.VISIBLE);
@@ -366,7 +374,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //                    binding.tvFileSize.setText(attachment.getSize());
 
                 }
-                if (chatMessage.getType().equals(MessageType.AUDIO_CALL) | chatMessage.getType().equals(MessageType.VIDEO_CALL)) {
+                if (chatMessage.getType().equals(MessageType.AUDIO_CALL) || chatMessage.getType().equals(MessageType.VIDEO_CALL)) {
                     if (chatMessage.getType().equals(MessageType.AUDIO_CALL)) {
                         binding.ivCallType.setBackground(ContextCompat.getDrawable(activity.getApplicationContext(), R.drawable.ic_round_call_24));
                         binding.tvCallType.setText("Audio Call");
@@ -431,7 +439,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 binding.lyFile.setVisibility(View.GONE);
                 binding.lyLocation.setVisibility(View.VISIBLE);
                 binding.lyCall.setVisibility(View.GONE);
-            } else if (type.equals(MessageType.AUDIO_CALL) | type.equals(MessageType.AUDIO_CALL)) {
+            } else if (type.equals(MessageType.AUDIO_CALL) || type.equals(MessageType.VIDEO_CALL)) {
                 binding.tvMessage.setVisibility(View.GONE);
                 binding.ivImage.setVisibility(View.GONE);
                 binding.lyFile.setVisibility(View.GONE);
@@ -470,8 +478,16 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                                     binding.tvReplyMessage.setText(message);
                                 }
 
-                                if (documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.MEDIA) | documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.FILE)) {
+                                if (documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.MEDIA) || documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.FILE)) {
                                     binding.tvReplyMessage.setText("@ Attachment");
+                                }
+
+                                if (documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.AUDIO_CALL)) {
+                                    binding.tvReplyMessage.setText("\uD83D\uDCDE Audio Call");
+                                }
+
+                                if (documentSnapshot.getString(Keys.KEY_TYPE).equals(MessageType.VIDEO_CALL)) {
+                                    binding.tvReplyMessage.setText("\uD83D\uDCF9 Video Call");
                                 }
 
                                 binding.tvReplyMessage.setVisibility(View.VISIBLE);
@@ -627,7 +643,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     });
 
                 }
-                if (chatMessage.getType().equals(MessageType.AUDIO_CALL) | chatMessage.getType().equals(MessageType.VIDEO_CALL)) {
+                if (chatMessage.getType().equals(MessageType.AUDIO_CALL) || chatMessage.getType().equals(MessageType.VIDEO_CALL)) {
                     if (chatMessage.getType().equals(MessageType.AUDIO_CALL)) {
                         binding.ivCallType.setBackground(ContextCompat.getDrawable(activity.getApplicationContext(), R.drawable.ic_round_call_24));
                         binding.tvCallType.setText("Audio Call");
@@ -692,7 +708,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 binding.lyFile.setVisibility(View.GONE);
                 binding.lyLocation.setVisibility(View.VISIBLE);
                 binding.lyCall.setVisibility(View.GONE);
-            } else if (type.equals(MessageType.AUDIO_CALL) | type.equals(MessageType.AUDIO_CALL)) {
+            } else if (type.equals(MessageType.AUDIO_CALL) || type.equals(MessageType.VIDEO_CALL)) {
                 binding.tvMessage.setVisibility(View.GONE);
                 binding.ivImage.setVisibility(View.GONE);
                 binding.lyFile.setVisibility(View.GONE);

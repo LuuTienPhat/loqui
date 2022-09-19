@@ -261,6 +261,8 @@ public class UsersActivity extends BaseActivity implements UserListener {
 
     @Override
     public void onUserClicked(User user) {
+        this.recipients.clear();
+        addToRecipients(preferenceManager.getString(Keys.KEY_USER_ID));
         addToRecipients(user.getId());
         updateRoom(user);
 

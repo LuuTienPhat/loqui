@@ -1,6 +1,7 @@
 package com.example.loqui.adapter;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -171,7 +172,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                     .document(chatMessage.getRoomId())
                     .get()
                     .addOnSuccessListener(documentSnapshot -> {
-                        if (documentSnapshot.getString(Keys.KEY_TYPE).equals(RoomType.GROUP)) {
+                        if (documentSnapshot.getString(Keys.KEY_TYPE).equals(RoomType.GROUP)) { // Nếu là nhóm nhiều người
                             binding.ivAvatar.setImageBitmap(Utils.getBitmapFromEncodedString(documentSnapshot.getString(Keys.KEY_AVATAR)));
                             binding.tvName.setText(documentSnapshot.getString(Keys.KEY_NAME));
 
@@ -187,7 +188,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                                         });
                             }
 
-                        } else {
+                        } else { // Nếu là nhóm 2 người
                             database.collection(Keys.KEY_COLLECTION_RECIPIENT)
                                     .whereEqualTo(Keys.KEY_ROOM_ID, chatMessage.getRoomId())
                                     .get()
@@ -278,6 +279,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 binding.tvDateTime.setText(Utils.getShortenedReadableTime(chatMessage.getCreatedDate()));
             } else {
                 binding.tvDateTime.setText(Utils.getShortenedReadableDate(chatMessage.getCreatedDate()));
+            }
+
+            if (!chatMessage.getUserId().equals(preferenceManager.getString(Keys.KEY_USER_ID))) {
+                binding.tvMessage.setTypeface(binding.tvMessage.getTypeface(), Typeface.BOLD);
+            } else {
+                binding.tvMessage.setTypeface(binding.tvMessage.getTypeface(), Typeface.NORMAL);
             }
 
             binding.getRoot().setOnClickListener(v -> {

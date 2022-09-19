@@ -6,6 +6,7 @@ public class RecipientStatus {
     public static String ADMIN = "admin";
 
     public static String ACCEPT = "accept";
+    public static String RECEIVED = "received";
     public static String DECLINE = "decline";
 
 

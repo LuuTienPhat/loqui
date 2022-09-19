@@ -8,5 +8,6 @@ public class Receiver {
     public static String CLOSE_INCOMING_CALL_ACTIVITY = "close_incoming_call_activity";
 
     public static String JOIN_OUTGOING_CALL_ACTIVITY = "close_outgoing_call_activity";
+    public static String RECEIVE_OUTGOING_CALL_ACTIVITY = "receive_outgoing_call_activity";
     public static String DECLINE = "decline";
 }
